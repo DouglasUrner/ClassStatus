@@ -3,8 +3,7 @@
 # Roster driver - given a CSV file of student demographics, generate
 # the initial JSON to populate the tiles.
 
-# TODO: normalize name presentation.
-# TODO: split given and family name.
+# TODO: finish normalizing name presentation.
 # TODO: map to preferred name.
 # TODO: pronouns?
 
