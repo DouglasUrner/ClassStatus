@@ -1,5 +1,8 @@
 #! ruby
 
+# Roster driver - given a CSV file of student demographics, generate
+# the initial JSON to populate the tiles.
+
 require 'csv'
 
 def kv_pair(k, v)
@@ -19,7 +22,7 @@ students.each { |student|
   end
   print "{\n"
   kv_pair("name", student[0])
-  kv_pair("repo", "")
+  kv_pair("GHuser", "")
   print "\t}"
 }
 puts "]\n}"
