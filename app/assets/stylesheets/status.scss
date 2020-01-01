@@ -1,13 +1,25 @@
 // Place all the styles related to the Status controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// Computer display
 table {
   border-spacing: 4px;
 }
 td {
   background-color: #DCDCDC;
   border: 1px solid black;
+  border-radius: 4px;
   padding: 2px;
   width: 10%;
   height: 40px;
 }
+td.blank {
+  // Is there a way to set values back to defaults?
+  background-color: #FFFFFF;
+  border: 0px;
+}
+
+// Mobile device:
+// Tiny grid with bacground set to status color (map of room).
+// Tap on tile to expand info for that student.
