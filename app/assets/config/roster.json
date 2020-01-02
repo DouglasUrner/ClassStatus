@@ -1,103 +1,103 @@
 {
 "students": [{
-		"fn": "Aiden",
-		"ln": "Donnelly",
-		"GHuser": ""
+		"given_name": "Aiden",
+		"family_name": "Donnelly",
+		"github_user": ""
 	},{
-		"fn": "Alexander",
-		"ln": "Herbst",
-		"GHuser": ""
+		"given_name": "Alexander",
+		"family_name": "Herbst",
+		"github_user": ""
 	},{
-		"fn": "Anthony",
-		"ln": "Hernandez",
-		"GHuser": ""
+		"given_name": "Anthony",
+		"family_name": "Hernandez",
+		"github_user": ""
 	},{
-		"fn": "Brian",
-		"ln": "Gaston",
-		"GHuser": ""
+		"given_name": "Brian",
+		"family_name": "Gaston",
+		"github_user": ""
 	},{
-		"fn": "Cadan",
-		"ln": "Smith",
-		"GHuser": ""
+		"given_name": "Cadan",
+		"family_name": "Smith",
+		"github_user": ""
 	},{
-		"fn": "Christian",
-		"ln": "Vlcek",
-		"GHuser": ""
+		"given_name": "Christian",
+		"family_name": "Vlcek",
+		"github_user": ""
 	},{
-		"fn": "Courtney",
-		"ln": "Stasio",
-		"GHuser": ""
+		"given_name": "Courtney",
+		"family_name": "Stasio",
+		"github_user": ""
 	},{
-		"fn": "David",
-		"ln": "Sickler Jr.",
-		"GHuser": ""
+		"given_name": "David",
+		"family_name": "Sickler Jr.",
+		"github_user": ""
 	},{
-		"fn": "Don",
-		"ln": "Sotto",
-		"GHuser": ""
+		"given_name": "Don",
+		"family_name": "Sotto",
+		"github_user": ""
 	},{
-		"fn": "Dylan",
-		"ln": "Castro",
-		"GHuser": ""
+		"given_name": "Dylan",
+		"family_name": "Castro",
+		"github_user": ""
 	},{
-		"fn": "Gilbert",
-		"ln": "Lizama",
-		"GHuser": ""
+		"given_name": "Gilbert",
+		"family_name": "Lizama",
+		"github_user": ""
 	},{
-		"fn": "Jacob",
-		"ln": "Burt",
-		"GHuser": ""
+		"given_name": "Jacob",
+		"family_name": "Burt",
+		"github_user": ""
 	},{
-		"fn": "Jordan",
-		"ln": "Plachy",
-		"GHuser": ""
+		"given_name": "Jordan",
+		"family_name": "Plachy",
+		"github_user": ""
 	},{
-		"fn": "Joshua",
-		"ln": "Credeur",
-		"GHuser": ""
+		"given_name": "Joshua",
+		"family_name": "Credeur",
+		"github_user": ""
 	},{
-		"fn": "Kayla",
-		"ln": "Jaqua",
-		"GHuser": ""
+		"given_name": "Kayla",
+		"family_name": "Jaqua",
+		"github_user": ""
 	},{
-		"fn": "Leah",
-		"ln": "Bird",
-		"GHuser": ""
+		"given_name": "Leah",
+		"family_name": "Bird",
+		"github_user": ""
 	},{
-		"fn": "Logan",
-		"ln": "Raschke",
-		"GHuser": ""
+		"given_name": "Logan",
+		"family_name": "Raschke",
+		"github_user": ""
 	},{
-		"fn": "Michiko",
-		"ln": "Damian",
-		"GHuser": ""
+		"given_name": "Michiko",
+		"family_name": "Damian",
+		"github_user": ""
 	},{
-		"fn": "Owen",
-		"ln": "Collins",
-		"GHuser": ""
+		"given_name": "Owen",
+		"family_name": "Collins",
+		"github_user": ""
 	},{
-		"fn": "Peyton",
-		"ln": "Atwood",
-		"GHuser": ""
+		"given_name": "Peyton",
+		"family_name": "Atwood",
+		"github_user": ""
 	},{
-		"fn": "Riley",
-		"ln": "Ruiz",
-		"GHuser": ""
+		"given_name": "Riley",
+		"family_name": "Ruiz",
+		"github_user": ""
 	},{
-		"fn": "Russell",
-		"ln": "Pavledakes",
-		"GHuser": ""
+		"given_name": "Russell",
+		"family_name": "Pavledakes",
+		"github_user": ""
 	},{
-		"fn": "Ryan",
-		"ln": "Ross",
-		"GHuser": ""
+		"given_name": "Ryan",
+		"family_name": "Ross",
+		"github_user": ""
 	},{
-		"fn": "Ryder",
-		"ln": "Christen",
-		"GHuser": ""
+		"given_name": "Ryder",
+		"family_name": "Christen",
+		"github_user": ""
 	},{
-		"fn": "Sawyer",
-		"ln": "Wilhelm",
-		"GHuser": ""
+		"given_name": "Sawyer",
+		"family_name": "Wilhelm",
+		"github_user": ""
 	}]
 }
