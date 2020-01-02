@@ -1,5 +1,5 @@
 * Drag-and-Drop
-  - [Muuri](https://haltu.github.io/muuri)
+  - [Muuri](https://haltu.github.io/muuri) - supports grids
 
 * GraphQL
   - [GraphQL for Ruby](https://graphql-ruby.org)
