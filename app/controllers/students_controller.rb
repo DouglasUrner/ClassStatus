@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   def index
     @students = Student.all
+    @sections = Section.all
   end
 
   def show
@@ -31,7 +32,7 @@ class StudentsController < ApplicationController
   end
 
   def update
-    @student = Student.find(student_params)
+    @student = Student.find(params[:id])
 
     if @student.update(student_params)
       redirect_to @student
