@@ -1,5 +1,6 @@
 * Drag-and-Drop
   - [Muuri](https://haltu.github.io/muuri) - supports grids
+  - [Sortable](https://sortablejs.github.io/Sortable) - also supports grids
 
 * GraphQL
   - [GraphQL for Ruby](https://graphql-ruby.org)
