@@ -49,9 +49,9 @@ students.each { |student|
   names = clean_name(student[0])
 
   print "{\n"
-  kv_pair("fn", names[1], true)
-  kv_pair("ln", names[3], true)
-  kv_pair("GHuser", "", false)
+  kv_pair("given_name", names[1], true)
+  kv_pair("family_name", names[3], true)
+  kv_pair("github_user", "", false)
   print "\t}"
 }
 puts "]\n}"
