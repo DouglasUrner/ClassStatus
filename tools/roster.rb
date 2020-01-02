@@ -9,8 +9,13 @@
 
 require 'csv'
 
-def kv_pair(k, v)
-  print "\t\t\"" + k + "\": \"" + v + "\",\n"
+def kv_pair(k, v, comma)
+  print "\t\t\"" + k + "\": \"" + v + "\""
+  if (comma)
+    print ",\n"
+  else
+    print "\n"
+  end
 end
 
 def clean_name(n)
@@ -44,9 +49,9 @@ students.each { |student|
   names = clean_name(student[0])
 
   print "{\n"
-  kv_pair("fn", names[1])
-  kv_pair("ln", names[3])
-  kv_pair("GHuser", "")
+  kv_pair("fn", names[1], true)
+  kv_pair("ln", names[3], true)
+  kv_pair("GHuser", "", false)
   print "\t}"
 }
 puts "]\n}"
