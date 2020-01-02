@@ -1,42 +1,17 @@
 <table>
-  <tr>
-    <td>Name</td>
-    <td><a href="https://github.com/douglasurner">Doug Urner</a></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blank"></td>
-    <td class="blank"></td>
-  </tr>
+  <% row = 0; col = 0 %>
+  <% @students.each do |s| %>
+    <% if (col == 0) %>
+      <tr>
+    <% end %>
+      <td>
+        <%= s.given_name %>
+      </td>
+    <% if (col == 7) %>
+      </tr>
+      <% col = 0 %>
+    <% else %>
+      <% col = col + 1 %>
+    <% end %>
+  <% end %>
 </table>
