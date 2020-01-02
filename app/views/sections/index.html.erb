@@ -1,0 +1,22 @@
+<h1>Sections</h1>
+
+<table>
+  <tr>
+    <th>Section</th>
+    <th>Course</th>
+    <th colspan="2"></th>
+  </tr>
+
+  <% @sections.each do |section| %>
+    <tr>
+      <td><%= section.name %></td>
+      <td><%= Course.find(section.course_id).name %></td>
+      <td><%= link_to 'Edit', edit_section_path(section) %></td>
+      <td><%= link_to 'Delete', section_path(section),
+              method: :delete, data: { confirm: 'Are you sure?'} %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'Add Section', new_section_path %></p>
