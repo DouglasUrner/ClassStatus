@@ -10,7 +10,7 @@
 require 'csv'
 
 def kv_pair(k, v)
-  print "\t\t\"" + k + "\": \"" + v + "\"\n"
+  print "\t\t\"" + k + "\": \"" + v + "\",\n"
 end
 
 def clean_name(n)
