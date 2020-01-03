@@ -1,8 +1,9 @@
 
 <div class="grid">
 
+  <% max_seats = 30; seat = 0 %>
   <% @students.each do |s| %>
-    <div class="item">
+    <div class="item" seat="<%= seat %>">
       <div class="item-content">
         <!-- Safe zone, enter your custom markup -->
         <p class="student-name"><%= s.given_name %></p>
@@ -10,18 +11,18 @@
         <!-- Safe zone ends -->
       </div>
     </div>
+    <% seat = seat + 1 %>
   <% end %>
 
-  <% empty_seats = 30 - @students.count %>
-  <% until (empty_seats == 0) %>
-    <div class="item">
+  <% until (seat == max_seats) %>
+    <div class="item empty-seat" seat="<%= seat %>">
       <div class="item-content">
         <!-- Safe zone, enter your custom markup -->
-        <% empty_seats %>
+
         <!-- Safe zone ends -->
       </div>
     </div>
-    <% empty_seats = empty_seats - 1 %>
+    <% seat = seat + 1 %>
   <% end %>
 
 </div>
@@ -31,5 +32,54 @@
 <script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>
 
 <script type="text/javascript">
-  var grid = new Muuri('.grid', {dragEnabled: true});
+  initGrid();
+
+  function initGrid() {
+    var grid = new Muuri('.grid', {
+      dragEnabled: true,
+      layoutOnInit: false
+    }).on('move', function () {
+      saveLayout(grid);
+    });
+
+    var layout = window.localStorage.getItem('layout');
+    if (layout) {
+      loadLayout(grid, layout);
+    } else {
+      grid.layout(true);
+    }
+  }
+
+  function serializeLayout(grid) {
+    var itemIds = grid.getItems().map(function (item) {
+      return item.getElement().getAttribute('seat');
+    });
+    return JSON.stringify(itemIds);
+  }
+
+  function saveLayout(grid) {
+    var layout = serializeLayout(grid);
+    window.localStorage.setItem('layout', layout);
+  }
+
+  function loadLayout(grid, serializedLayout) {
+    var layout = JSON.parse(serializedLayout);
+    var currentItems = grid.getItems();
+    var currentItemIds = currentItems.map(function (item) {
+      return item.getElement().getAttribute('seat')
+    });
+    var newItems = [];
+    var itemId;
+    var itemIndex;
+
+    for (var i = 0; i < layout.length; i++) {
+      itemId = layout[i];
+      itemIndex = currentItemIds.indexOf(itemId);
+      if (itemIndex > -1) {
+        newItems.push(currentItems[itemIndex])
+      }
+    }
+
+    grid.sort(newItems, {layout: 'instant'});
+  }
 </script>
