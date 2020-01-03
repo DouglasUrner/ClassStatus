@@ -3,21 +3,49 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 // Computer display
-table {
-  border-spacing: 4px;
+// table.status {
+//   border-spacing: 4px;
+// }
+// td {
+//   background-color: #DCDCDC;
+//   border: 1px solid black;
+//   border-radius: 4px;
+//   padding: 2px;
+//   width: 10%;
+//   height: 40px;
+// }
+// td.blank {
+//   // Is there a way to set values back to defaults?
+//   background-color: #FFFFFF;
+//   border: 0px;
+// }
+
+.grid {
+  position: relative;
 }
-td {
+.item {
+  display: block;
+  position: absolute;
+  width: 11%;
+  min-height: 50px;
+  margin: 4px;
+  z-index: 1;
   background-color: #DCDCDC;
-  border: 1px solid black;
-  border-radius: 4px;
-  padding: 2px;
-  width: 10%;
-  height: 40px;
+  color: #000;
 }
-td.blank {
-  // Is there a way to set values back to defaults?
-  background-color: #FFFFFF;
-  border: 0px;
+.item.muuri-item-dragging {
+  z-index: 3;
+}
+.item.muuri-item-releasing {
+  z-index: 2;
+}
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 // Mobile device:
