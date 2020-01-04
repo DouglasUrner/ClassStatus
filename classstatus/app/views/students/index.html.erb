@@ -5,13 +5,15 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>GitHub User</th>
+    <th>E-mail Address</th>
+    <th>GitHub Username</th>
     <th colspan="2"></th>
   </tr>
 
   <% @students.each do |student| %>
     <tr>
       <td><%= student.given_name %> <%= student.family_name %></td>
+      <td><a mailto="<%= student.email %>"><%= student.email %></a></td>
       <td><a href="https://github.com/<%= student.github_user %>">
         <%= student.github_user %>
       </td>

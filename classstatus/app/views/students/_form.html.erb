@@ -52,13 +52,18 @@
   </p>
 
   <p>
-    <%= form.label :github_user %><br>
+    <%= form.label :email_address %><br>
+    <%= form.text_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :github_username %><br>
     <%= form.text_field :github_user %>
   </p>
 
   <p>
     <%= form.label :gpa %><br>
-    <%= form.number_field :gpa %>
+    <%= form.number_field :gpa, step: 0.001 %>
   </p>
 
   <p>

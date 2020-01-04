@@ -77,6 +77,6 @@ class StudentsController < ApplicationController
           :guid, :given_name, :family_name, :preferred_name,
           :gender, :pronouns, :known_to,
           :dob, :cohort,
-          :github_user, :gpa)
+          :email, :github_user, :gpa)
     end
   end
