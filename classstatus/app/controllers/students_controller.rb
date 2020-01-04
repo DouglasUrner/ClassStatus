@@ -24,13 +24,19 @@ class StudentsController < ApplicationController
     students = roster_hash['students']
     students.map do |s|
       p = ActionController::Parameters.new(student: s.to_hash)
-      @student = Student.new(student_params(p))
-      @student.save!
-      count += 1
+      # Check to see if we've alread imported
+      # this student before importing.
+      if (Student.exists?(guid: p[:guid]))
+        dupes += 1
+      else
+        @student = Student.new(student_params(p))
+        @student.save!
+        count += 1
+      end
     end
 
     redirect_to students_path,
-      notice: "#{count} students imported from #{params[:file].original_filename}"
+      notice: "Imported #{count} students from #{params[:file].original_filename}, #{dupes} duplicates skipped"
   end
 
   def edit
@@ -67,6 +73,10 @@ class StudentsController < ApplicationController
 
   private
     def student_params(p = params)
-      p.require(:student).permit(:given_name, :family_name, :preferred_name, :pronouns, :github_user)
+      p.require(:student).permit(
+          :guid, :given_name, :family_name, :preferred_name,
+          :gender, :pronouns, :known_to,
+          :dob, :cohort,
+          :github_user, :gpa)
     end
   end

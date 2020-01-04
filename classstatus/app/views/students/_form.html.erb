@@ -15,8 +15,19 @@
   <% end %>
 
   <p>
+    <%= form.label :student_number %><br>
+    <%= form.number_field :guid %>
+  </p>
+
+  <p>
     <%= form.label :given_name %><br>
     <%= form.text_field :given_name %>
+  </p>
+
+  <p>
+    <%= form.label :preferred_name %><br>
+    <%= form.text_field :preferred_name %>
+    <%= form.select :known_to, ['Everone', 'Staff', 'Parents', 'Other'] %>
   </p>
 
   <p>
@@ -25,8 +36,29 @@
   </p>
 
   <p>
+    <%= form.label :gender %><br>
+    <%= form.select :gender, ['F', 'X', 'M'] %>
+    <%= form.text_field :pronouns %>
+  </p>
+
+  <p>
+    <%= form.label :birthday %><br>
+    <%= form.date_field :dob %>
+  </p>
+
+  <p>
+    <%= form.label :graduation_cohort %><br>
+    <%= form.number_field :cohort %>
+  </p>
+
+  <p>
     <%= form.label :github_user %><br>
     <%= form.text_field :github_user %>
+  </p>
+
+  <p>
+    <%= form.label :gpa %><br>
+    <%= form.number_field :gpa %>
   </p>
 
   <p>

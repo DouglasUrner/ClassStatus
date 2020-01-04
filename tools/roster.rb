@@ -4,10 +4,18 @@
 # the initial JSON to populate the tiles.
 
 # TODO: finish normalizing name presentation.
-# TODO: map to preferred name.
 # TODO: pronouns?
 
+# Columns (as returned by split):
+# 0: Last, First M.
+# 1: Student ID
+# 2: Birthdate
+# 3: GPA
+# 4: Gender
+# 5: Graduation cohort
+
 require 'csv'
+require 'json'
 
 def kv_pair(k, v, comma)
   print "\t\t\"" + k + "\": \"" + v + "\""
@@ -34,6 +42,12 @@ def clean_name(n)
   parts
 end
 
+def fix_dob(d)
+  dmy = d.split('/')
+  y = (dmy[2] < "20") ? "20" + dmy[2] : "19" + dmy[2]
+  y + '-' + dmy[0] + '-' + dmy[1]
+end
+
 first_time = true
 
 print "{\n\"students\": ["
@@ -47,11 +61,18 @@ students.each { |student|
   end
 
   names = clean_name(student[0])
+  dob = fix_dob(student[2])
+  gender = student[4] == 'Male' ? 'M' : 'F'
 
   print "{\n"
+  kv_pair("guid", student[1], true)
   kv_pair("given_name", names[1], true)
   kv_pair("family_name", names[3], true)
-  kv_pair("github_user", "", false)
+  kv_pair("gender", gender, true)
+  kv_pair("dob", dob, true)
+  kv_pair("cohort", student[5], true)
+  kv_pair("github_user", "", true)
+  kv_pair("gpa", student[3], false)
   print "\t}"
 }
 puts "]\n}"

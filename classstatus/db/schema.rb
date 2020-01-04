@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_03_223220) do
+ActiveRecord::Schema.define(version: 2020_01_04_020357) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -27,14 +27,19 @@ ActiveRecord::Schema.define(version: 2020_01_03_223220) do
   end
 
   create_table "students", force: :cascade do |t|
+    t.integer "guid"
     t.string "given_name"
-    t.string "family_name"
     t.string "preferred_name"
+    t.string "known_to"
+    t.string "family_name"
+    t.string "gender"
     t.string "pronouns"
+    t.date "dob"
+    t.integer "cohort"
     t.string "github_user"
+    t.float "gpa"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "guid"
   end
 
   add_foreign_key "sections", "courses"
