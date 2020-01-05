@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-  has_many :enrollments
+  has_many :enrollments, dependent: :destroy
   has_many :sections, through: :enrollments
 
   # TODO: validate that at least one is present and length > 2
