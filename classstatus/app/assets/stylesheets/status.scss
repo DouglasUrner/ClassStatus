@@ -1,6 +1,11 @@
 // Place all the styles related to the Status controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.status-controls {
+  background-color: #888888;
+  color: white;
+  padding: 2px;
+}
 
 .grid {
   position: relative;
@@ -12,7 +17,7 @@
   margin: 4px;
   min-height: 150px;
   position: absolute;
-  width: 11%;
+  width: 11.9%;
   z-index: 1;
 }
 .item.empty-seat {
