@@ -10,6 +10,14 @@
   </head>
 
   <body>
+    <nav>
+      <h2>
+        <%= link_to "Status", root_path %>
+        <%= link_to "Students", students_path %>
+        <%= link_to "Sections", sections_path %>
+        <%= link_to "Courses", courses_path %>
+      </h2>
+    </nav>
     <%= yield %>
   </body>
 </html>
