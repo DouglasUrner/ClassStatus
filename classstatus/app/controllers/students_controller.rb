@@ -15,28 +15,39 @@ class StudentsController < ApplicationController
 
   # Impart a JSON formatted class roster.
   def import
-    count = 0
-    dupes = 0
+    count = 0; enrolled = 0; dupes = 0
 
-    roster = File.read(params[:file].path)
-    roster_hash = JSON.parse(roster)
+    roster = JSON.parse( File.read(params[:file].path) )
 
-    students = roster_hash['students']
-    students.map do |s|
-      p = ActionController::Parameters.new(student: s.to_hash)
-      # Check to see if we've alread imported
-      # this student before importing.
-      if (Student.exists?(guid: p[:guid]))
+    roster['students'].map do |s|
+
+      p = ActionController::Parameters.new(student: s)
+
+      # Check to see if we've already imported this student before proceeding.
+      if (Student.exists?(guid: s["guid"].to_i))
+        @student = Student.find_by(guid: s["guid"].to_i)
         dupes += 1
       else
         @student = Student.new(student_params(p))
         @student.save!
         count += 1
       end
+
+      # Enroll nwe students in section
+      if (!Enrollment.exists?(student_id: @student, section_id: params[:section]))
+        @enrollment = Enrollment.new()
+        @enrollment.student_id = @student.id
+        @enrollment.section_id = params[:section]
+        # TODO: add active flag to Enrollment
+        @enrollment.save!
+        enrolled += 1
+      end
     end
 
     redirect_to students_path,
-      notice: "Imported #{count} students from #{params[:file].original_filename}, #{dupes} duplicates skipped"
+      notice: "Imported #{count} students from #{params[:file].original_filename}. " +
+              "Enrolled #{enrolled} students in #{Section.find(params[:section]).course.name}. " +
+              "Skipped #{dupes} students who were already in the database."
   end
 
   def edit
