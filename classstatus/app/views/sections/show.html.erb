@@ -1,3 +1,9 @@
-<p>
-  <%= @section.name %>: <%= Course.find(@section.course_id).name %>
-</p>
+<h2><%= @section.name %>: <%= Course.find(@section.course_id).name %></h2>
+
+<table>
+  <% @enrollments.each do |e| %>
+    <tr>
+      <td><%= e.student.given_name %> <%= e.student.family_name %></td>
+    </tr>
+  <% end %>
+</table>
