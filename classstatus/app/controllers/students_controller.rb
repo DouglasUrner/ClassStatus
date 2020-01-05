@@ -1,8 +1,10 @@
 require 'json'
 
 class StudentsController < ApplicationController
+  helper StudentsHelper
+  
   def index
-    @students = Student.all
+    @students = Student.order(:family_name).order(:preferred_name).order(:given_name)
   end
 
   def show

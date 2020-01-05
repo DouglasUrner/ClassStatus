@@ -6,7 +6,7 @@
     <div class="item" seat="<%= seat %>">
       <div class="item-content">
         <!-- Safe zone, enter your custom markup -->
-        <p class="student-name"><%= s.given_name %></p>
+        <p class="student-name"><%= format_name(s) %></p>
         <p><a href="https://github.com/<%= s.github_user %>"><%= s.github_user %></a></p>
         <!-- Safe zone ends -->
       </div>
