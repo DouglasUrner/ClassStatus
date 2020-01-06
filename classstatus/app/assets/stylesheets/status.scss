@@ -8,6 +8,14 @@
   padding: 2px;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited.active {
+  color: red;
+}
+
 .grid {
   position: relative;
 }
