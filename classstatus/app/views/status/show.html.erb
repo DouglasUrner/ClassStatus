@@ -2,8 +2,17 @@
 
 <div class="status-controls">
   <h2>
-    Schedule
-    Section
+    Block:
+    <!-- params[:id] = <%= params[:id] %> -->
+    <% (1..8).each do |b| %>
+      <% if (b == params[:id].to_i) %>
+        <%= link_to b, status_path(b), class: "active" %>
+      <% else %>
+        <%= link_to b, status_path(b) %>
+      <% end %>
+    <% end %>
+
+    <%= Section.find(@active_section).course.name %>
   </h2>
 </div>
 
