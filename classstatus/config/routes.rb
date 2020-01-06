@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # see https://guides.rubyonrails.org/routing.html
 
   get 'status/index'
+  get 'status/:id', to: 'status#index'
 
   root 'status#index'
 

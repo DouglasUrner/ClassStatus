@@ -1,3 +1,4 @@
+<!-- apps/views/status/index.html.erb -->
 
 <div class="status-controls">
   <h2>
@@ -9,7 +10,8 @@
 <div class="grid">
 
   <% max_seats = 30; seat = 0 %>
-  <% @students.each do |s| %>
+  <% @enrollments.each do |e| %>
+    <% s = e.student %>
     <div class="item" seat="<%= seat %>">
       <div class="item-content">
         <!-- Safe zone, enter your custom markup -->
