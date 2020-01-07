@@ -20,17 +20,17 @@ class CoursesController < ApplicationController
       @course = Course.new(course_params)
 
       if @course.save
-        redirect_to @course
+        redirect_to courses_path
       else
         render 'new'
       end
     end
 
     def update
-      @course = Course.find(course_params)
+      @course = Course.find(params[:id])
 
       if @course.update(course_params)
-        redirect_to @course
+        redirect_to courses_path
       else
         render 'edit'
       end
@@ -45,6 +45,6 @@ class CoursesController < ApplicationController
 
     private
       def course_params
-        params.require(:course).permit(:name)
+        params.require(:course).permit(:name, :shortname)
       end
 end

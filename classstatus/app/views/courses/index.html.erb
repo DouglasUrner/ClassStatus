@@ -3,12 +3,14 @@
 <table>
   <tr>
     <th>Course Name</th>
+    <th>Short Name</th>
     <th colspan="2"></th>
   </tr>
 
   <% @courses.each do |course| %>
     <tr>
       <td><%= course.name %></td>
+      <td><%= course.shortname %></td>
       <td><%= link_to 'Edit', edit_course_path(course) %></td>
       <td><%= link_to 'Delete', course_path(course),
               method: :delete, data: { confirm: 'Are you sure?'} %>
@@ -16,3 +18,5 @@
     </tr>
   <% end %>
 </table>
+
+<%= link_to "+", new_course_path %>
