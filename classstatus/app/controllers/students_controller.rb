@@ -26,8 +26,8 @@ class StudentsController < ApplicationController
       p = ActionController::Parameters.new(student: s)
 
       # Check to see if we've already imported this student before proceeding.
-      if (Student.exists?(guid: s[:guid]))
-        @student = Student.find_by(guid: s[:guid])
+      if (Student.exists?(guid: s['guid']))
+        @student = Student.find_by(guid: s['guid'])
         dupes += 1
       else
         @student = Student.new(student_params(p))
