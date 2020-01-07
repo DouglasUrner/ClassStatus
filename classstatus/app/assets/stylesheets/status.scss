@@ -7,15 +7,12 @@
   height: 6vh;
   padding: 2px;
 }
-
 a {
   text-decoration: none;
 }
-
 a:visited.active {
   color: red;
 }
-
 .grid {
   position: relative;
 }
@@ -29,6 +26,7 @@ a:visited.active {
   width: 11.9%;
   z-index: 1;
 }
+// Should this be data-empty-seat?
 .item.empty-seat {
   background-color: #EEEEEE;
 }
