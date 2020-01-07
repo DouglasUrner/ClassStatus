@@ -12,7 +12,7 @@
       <% end %>
     <% end %>
 
-    <%= Section.find(@active_section).course.name %>
+    <%= Section.find(session[:active_block]).course.name %>
   </h2>
 </div>
 
