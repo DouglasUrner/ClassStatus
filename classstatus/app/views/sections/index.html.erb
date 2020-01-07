@@ -3,6 +3,9 @@
 <table>
   <tr>
     <th>Section</th>
+    <th>Block</th>
+    <th>Semester</th>
+    <th>Year</th>
     <th>Course</th>
     <th>Students</th>
     <th colspan="2"></th>
@@ -11,6 +14,9 @@
   <% @sections.each do |section| %>
     <tr>
       <td><%= link_to section.name, section_path(section) %></td>
+      <td><%= section.block %></td>
+      <td><%= section.semester %></td>
+      <td><%= section.year %></td>
       <td><%= Course.find(section.course_id).name %></td>
       <td><%= Enrollment.where(section: section).count %></td>
       <td><%= link_to 'Edit', edit_section_path(section) %></td>
@@ -21,4 +27,4 @@
   <% end %>
 </table>
 
-<p><%= link_to 'Add Section', new_section_path %></p>
+<p><%= link_to '+', new_section_path %></p>

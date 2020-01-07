@@ -20,6 +20,21 @@
   </p>
 
   <p>
+    <%= form.label :block %><br>
+    <%= form.number_field :block %>
+  </p>
+
+  <p>
+    <%= form.label :semester %><br>
+    <%= form.text_field :semester %>
+  </p>
+
+  <p>
+    <%= form.label :year %><br>
+    <%= form.text_field :year %>
+  </p>
+
+  <p>
     <%= form.label :course %><br>
     <%= form.collection_select :course_id, Course.order(:name), :id, :name %>
   </p>
