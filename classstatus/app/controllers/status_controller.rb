@@ -2,7 +2,7 @@ class StatusController < ApplicationController
   helper StudentsHelper
 
   def show
-    if (@Student == nil)
+    if (!Student.exists?)
       # First we need students, so when the students table is empty
       # go to the import page.
       redirect_to students_path
