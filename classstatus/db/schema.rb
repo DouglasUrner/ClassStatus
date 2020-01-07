@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_050347) do
+ActiveRecord::Schema.define(version: 2020_01_07_053512) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
+    t.string "shortname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -23,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_01_07_050347) do
     t.integer "section_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true
     t.index ["section_id"], name: "index_enrollments_on_section_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
@@ -32,6 +34,9 @@ ActiveRecord::Schema.define(version: 2020_01_07_050347) do
     t.integer "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "block"
+    t.string "semester"
+    t.string "year"
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
