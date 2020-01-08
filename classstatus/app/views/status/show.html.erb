@@ -2,17 +2,11 @@
 
 <div class="status-controls">
   <h2>
-    Block:
-    <!-- params[:id] = <%= params[:id] %> -->
-    <% (1..8).each do |b| %>
-      <% if (b == params[:id].to_i) %>
-        <%= link_to b, status_path(b), class: "active" %>
-      <% else %>
-        <%= link_to b, status_path(b) %>
-      <% end %>
-    <% end %>
+    Block: <%= block_selector("2019-2020", "S1") %>
 
     <%= Section.find_by(block: session[:active_block]).course.name %>
+
+    <span class="attendance-button">Take Attendance</span>
   </h2>
 </div>
 
