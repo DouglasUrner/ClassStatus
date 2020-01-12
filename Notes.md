@@ -11,7 +11,7 @@
 
 * GraphQL
   - [GraphQL for Ruby](https://graphql-ruby.org)
-  - [Canvas GraphQL docs]() - There is a Graph*i*QL endpoint at https://canvas.instructure.com/graphiql.
+  - [Canvas GraphQL docs](https://canvas.instructure.com/doc/api/file.graphql.html) - There is a Graph*i*QL endpoint at https://canvas.instructure.com/graphiql. The endpoint seems to work, at least for queries, after logging in without credentials. Credentials may be generated on the settings page of the course.
 
 * Open Source Lab Management / Monitoring Tools
   - [Veyon](https://veyon.io) - Supports Linux and Windows, open to macOS work. Does not currently appear to offer browser blocking/logging. Has command line tool, but does not appear to expose a web API. Source maintained on GitHub ([veyon/veyon](https://github.com/veyon/veyon)).
