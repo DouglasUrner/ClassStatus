@@ -11,6 +11,7 @@
 
 * GraphQL
   - [GraphQL for Ruby](https://graphql-ruby.org)
+  - [f/graphql.js](https://github.com/f/graphql.js) - JavaScript client.
   - [Canvas GraphQL docs](https://canvas.instructure.com/doc/api/file.graphql.html) - There is a Graph*i*QL endpoint at https://canvas.instructure.com/graphiql. The endpoint seems to work, at least for queries, after logging in without credentials. Credentials may be generated on the settings page of the course.
   - [GitHub GraphQL docs](https://developer.github.com/v4/) - There is a Graph*i*QL endpoint.
 
