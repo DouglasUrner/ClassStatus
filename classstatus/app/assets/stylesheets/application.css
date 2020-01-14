@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ html, body {
+   font-family: "Helvetica Nueue", Helvetica, sans-serif;
+ }
 
  nav {
    background-color: black;

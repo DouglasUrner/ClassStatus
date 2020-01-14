@@ -1,4 +1,5 @@
 class StatusController < ApplicationController
+  helper StatusHelper
   helper StudentsHelper
 
   def show

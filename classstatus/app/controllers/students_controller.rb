@@ -35,7 +35,7 @@ class StudentsController < ApplicationController
         count += 1
       end
 
-      # Enroll nwe students in section
+      # Enroll new students in section
       if (!Enrollment.exists?(student_id: @student, section_id: params[:section]))
         @enrollment = Enrollment.new()
         @enrollment.student_id = @student.id
