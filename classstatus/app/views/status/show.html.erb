@@ -20,7 +20,12 @@
         <!-- Safe zone, enter your custom markup -->
         <p class="student-name"><%= format_name(s) %></p>
         <p><a href="https://github.com/<%= s.github_user %>"><%= s.github_user %></a></p>
-        <!-- Safe zone ends -->
+        <div class="assignment-status-area">
+          <%= assignment_tile(42, 1, 0, 0) %>
+          <%= assignment_tile(42, 2, 0, 0) %>
+          <%= assignment_tile(42, 3, 0, 0) %>
+          <%= assignment_tile(42, 4, 0, 0) %>
+        </div>
       </div>
     </div>
     <% seat = seat + 1 %>
