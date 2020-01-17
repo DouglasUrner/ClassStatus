@@ -21,6 +21,11 @@
 * [GraphQL on Rails](https://evilmartians.com/chronicles/graphql-on-rails-1-from-zero-to-the-first-query)
 * [Interacting with Github GraphQL API in Ruby](https://medium.com/devnetwork/interacting-with-github-graphql-api-in-ruby-6a09249dd44f)
 
+## Tools for machine grading of code and detecting duplicated code
+
+* [MOSS](https://moss.stanford.edu)
+* [Codequiry](https://codequiry.com/auto-grading-programming) - commercial mash-up of MOSS and Turn It In, also offer and autograding tool
+
 ## Open Source Lab Management / Monitoring Tools
   - [Veyon](https://veyon.io) - Supports Linux and Windows, open to macOS work. Does not currently appear to offer browser blocking/logging. Has command line tool, but does not appear to expose a web API. Source maintained on GitHub ([veyon/veyon](https://github.com/veyon/veyon)).
   - [Epoptes](https://epoptes.org) - Linux only. There are brief notes on developing a Windows client in the docs. Source maintained on GitHub ([epoptes/epoptes](https://github.com/epoptes/epoptes)).
