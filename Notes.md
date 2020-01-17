@@ -23,7 +23,7 @@
 
 ## Tools for machine grading of code and detecting duplicated code
 
-* [MOSS](https://moss.stanford.edu)
+* [MOSS](https://moss.stanford.edu) or http://theory.stanford.edu/~aiken/moss/
 * [Codequiry](https://codequiry.com/auto-grading-programming) - commercial mash-up of MOSS and Turn It In, also offer and autograding tool
 
 ## Open Source Lab Management / Monitoring Tools
