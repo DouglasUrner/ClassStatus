@@ -1,3 +1,52 @@
 // Place all the styles related to the progress controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+/*
+** Appearence
+*/
+
+.unseated {
+  background-color: #AAA;
+}
+.seatmap {
+  background-color: #CCC;
+}
+.seat {
+  background-color: #DDD;
+  border-radius: 5px;
+}
+.student-item {
+  background-color: #88F;
+  border-radius: 5px;
+}
+
+/*
+** Page layout
+*/
+
+.seatmap {
+  width: 100%;
+  min-height: 600px;
+}
+.row {
+  height: 140px;
+}
+.seat {
+  width: 10%;
+  min-height: 60px;
+  margin: 8px 0 0 1.5%;
+  float: left;
+}
+.student-item {
+  width: 90%;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/*
+** Muuri required CSS
+*/
+.area { position: relative; }
+.student-item { position: absolute; }
+.student-content { position: relative; }
