@@ -1,10 +1,10 @@
 <div class='seatmap'>
-  <% rows = [8, 8, 8, 6] %>
+  <% rows = [8, 8, 8, 8] %>
   <% rows.each do |r| %>
-    <div class="row">
-    <% 0.upto(r) do |c| %>
+    <div class="seatmap-row">
+    <% r.times do |c| %>
       <div class="seat">
-
+        <%= "#{r}.#{c}" %>
       </div>
     <% end %>
     </div>
