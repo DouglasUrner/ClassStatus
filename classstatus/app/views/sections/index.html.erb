@@ -12,15 +12,16 @@
   </thead>
 
   <tbody>
-    <% @sections.each do |section| %>
+    <% @sections.each do |s| %>
       <tr>
-        <td><%= section.course.name %></td>
-        <td><%= section.year.name %></td>
-        <td><%= section.term.name %></td>
-        <td><%= section.block.name %></td>
-        <td><%= link_to 'Show', section %></td>
-        <td><%= link_to 'Edit', edit_section_path(section) %></td>
-        <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= s.course.name %></td>
+        <td><%= s.year.name %></td>
+        <td><%= s.term.name %></td>
+        <td><%= s.block.name %></td>
+        <td><%= link_to 'Show', s %></td>
+        <td><%= link_to 'Edit', edit_section_path(s) %></td>
+        <td><%= link_to 'Destroy', s, method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
