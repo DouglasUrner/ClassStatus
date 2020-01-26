@@ -4,7 +4,9 @@ class SectionsController < ApplicationController
   # GET /sections
   # GET /sections.json
   def index
-    @sections = Section.all
+    # XXX: This is fragile, should be sorting on the block sort order.
+    #      Or better, there should be a section sort method.
+    @sections = Section.order(:block_id)
   end
 
   # GET /sections/1
