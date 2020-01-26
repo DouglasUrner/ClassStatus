@@ -1,0 +1,22 @@
+<p>
+  <strong>Course:</strong>
+  <%= @section.course.name %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @section.year.name %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @section.term.name %>
+</p>
+
+<p>
+  <strong>Block:</strong>
+  <%= @section.block.name %>
+</p>
+
+<%= link_to 'Edit', edit_section_path(@section) %> |
+<%= link_to 'Back', sections_path %>
