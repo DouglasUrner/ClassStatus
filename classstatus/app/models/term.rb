@@ -11,4 +11,8 @@ class Term < ApplicationRecord
   def short_name
     term_name.short_name
   end
+
+  def long_name
+    "#{self.name} (#{self.short_name})"
+  end
 end

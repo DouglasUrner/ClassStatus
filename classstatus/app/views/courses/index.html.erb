@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Short name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,11 +13,11 @@
   <tbody>
     <% @courses.each do |course| %>
       <tr>
-        <td><%= course.name %></td>
-        <td><%= course.short_name %></td>
+        <td><%= course.long_name %></td>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', course, method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
