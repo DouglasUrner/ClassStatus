@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ClassStatus</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title><%= content_for?(:title) ? yield(:title) : 'Foundation' %></title>
+    <meta name='description'
+      content='<%= content_for?(:description) ? yield(:description) : "Foundation" %>'>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav>
-      <h2>
-        <%= link_to "Status", root_path %>
-        <%= link_to "Students", students_path %>
-        <%= link_to "Sections", sections_path %>
-        <%= link_to "Courses", courses_path %>
-      </h2>
-    </nav>
-    <%= yield %>
+    <header>
+      <%= render 'layouts/navbar' %>
+    </header>
+    <main role='main'>
+      <%= render 'layouts/alerts' %>
+      <div class='container'>
+        <%= content_for?(:content) ? yield(:content) : yield %>
+      </div>
+    </main>
   </body>
 </html>

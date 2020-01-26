@@ -1,3 +1,8 @@
 class Course < ApplicationRecord
-  has_many :sections
+  validates :name,       presence: true
+  validates :short_name, presence: true
+
+  def long_name
+    "#{self.name} (#{self.short_name})"
+  end
 end

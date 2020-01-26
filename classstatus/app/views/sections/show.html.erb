@@ -1,9 +1,22 @@
-<h2><%= @section.name %>: <%= Course.find(@section.course_id).name %></h2>
+<p>
+  <strong>Course:</strong>
+  <%= @section.course.name %>
+</p>
 
-<table>
-  <% @enrollments.each do |e| %>
-    <tr>
-      <td><%= e.student.given_name %> <%= e.student.family_name %></td>
-    </tr>
-  <% end %>
-</table>
+<p>
+  <strong>Year:</strong>
+  <%= @section.year.name %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @section.term.name %>
+</p>
+
+<p>
+  <strong>Block:</strong>
+  <%= @section.block.name %>
+</p>
+
+<%= link_to 'Edit', edit_section_path(@section) %> |
+<%= link_to 'Back', sections_path %>

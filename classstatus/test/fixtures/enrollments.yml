@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  students: one
-  sections: one
-
-two:
-  students: two
-  sections: two

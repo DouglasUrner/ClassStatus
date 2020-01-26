@@ -10,55 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_053512) do
+ActiveRecord::Schema.define(version: 2020_01_26_033817) do
 
-  create_table "courses", force: :cascade do |t|
+  create_table "settings", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.string "target_type", null: false
+    t.integer "target_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
+    t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
+  end
+
+  create_table "term_names", force: :cascade do |t|
     t.string "name"
-    t.string "shortname"
+    t.string "short_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "enrollments", force: :cascade do |t|
-    t.integer "student_id", null: false
-    t.integer "section_id", null: false
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "active", default: true
-    t.index ["section_id"], name: "index_enrollments_on_section_id"
-    t.index ["student_id"], name: "index_enrollments_on_student_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "sections", force: :cascade do |t|
+  create_table "years", force: :cascade do |t|
     t.string "name"
-    t.integer "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "block"
-    t.string "semester"
-    t.string "year"
-    t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
-  create_table "students", force: :cascade do |t|
-    t.string "guid", null: false
-    t.string "given_name"
-    t.string "preferred_name"
-    t.string "known_to"
-    t.string "family_name"
-    t.string "gender"
-    t.string "pronouns"
-    t.date "dob"
-    t.integer "cohort"
-    t.string "github_user"
-    t.float "gpa"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "email"
-    t.index ["guid"], name: "index_students_on_guid", unique: true
-  end
-
-  add_foreign_key "enrollments", "sections"
-  add_foreign_key "enrollments", "students"
-  add_foreign_key "sections", "courses"
 end

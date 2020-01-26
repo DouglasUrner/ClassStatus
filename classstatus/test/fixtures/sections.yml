@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
   course: one
+  year: one
+  term: one
+  block: one
 
 two:
-  name: MyString
   course: two
+  year: two
+  term: two
+  block: two
