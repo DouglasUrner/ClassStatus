@@ -1,10 +1,15 @@
 <div class='seatmap'>
-  <% rows = [8, 8, 8, 8] %>
-  <% rows.each do |r| %>
+  <% rows = 4; cols = 8 %>
+  <% row_len = [8, 8, 8, 6] %>
+  <% rows.times do |r| %>
     <div class="seatmap-row">
-    <% r.times do |c| %>
-      <div class="seat">
+    <% row_len[r].times do |c| %>
+      <div class="area seat">
         <%= "#{r}.#{c}" %>
+      </div>
+    <% end %>
+    <% (cols - row_len[r]).times do |c| %>
+      <div class="area seat not-a-seat">
       </div>
     <% end %>
     </div>

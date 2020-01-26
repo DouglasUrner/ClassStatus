@@ -5,20 +5,22 @@
 /*
 ** Appearence
 */
-
 .unseated {
   background-color: #AAA;
 }
 .seatmap {
   background-color: #CCC;
   border-radius: 5px;
-  padding: 4px;
+  padding: 8px;
 }
 .seat {
   background-color: #DDD;
   border-radius: 5px;
 }
 .seat.empty-seat {
+  background-color: #BBB;
+}
+.seat.not-a-seat {
   background-color: #CCC;
 }
 .student-item {
@@ -29,7 +31,6 @@
 /*
 ** Page layout
 */
-
 .seatmap {
   width: 100%;
   display: flex;
@@ -43,7 +44,7 @@
 .seat {
   height: auto;
   margin: 4px 4px 4px 4px;
-  flex-grow: 1;
+  flex: 1;
 }
 .student-item {
   width: 90%;
