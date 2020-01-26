@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :courses
   resources :terms
   resources :term_names
   resources :years
