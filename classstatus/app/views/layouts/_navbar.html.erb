@@ -46,7 +46,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Units</a>
             <a class="dropdown-item" href="#">Assignments</a>
-            <a class="dropdown-item" href="#">Students</a>
+            <%= link_to 'Students',  students_path,   class: 'dropdown-item' %>
             <div class="dropdown-divider"></div>
             <%= link_to 'Courses',   courses_path,    class: 'dropdown-item' %>
             <%= link_to 'Sections',  sections_path,   class: 'dropdown-item' %>

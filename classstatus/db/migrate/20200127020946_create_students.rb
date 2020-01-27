@@ -4,8 +4,9 @@ class CreateStudents < ActiveRecord::Migration[6.0]
       t.string :guid
       t.string :preferred_name
       t.string :given_name
+      t.string :family_name
       t.date :dob
-      t.int :cohort
+      t.integer :cohort
       t.float :gpa
       t.datetime :gpa_updated
 

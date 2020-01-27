@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_26_033817) do
+ActiveRecord::Schema.define(version: 2020_01_27_020946) do
+
+  create_table "blocks", force: :cascade do |t|
+    t.string "name"
+    t.integer "sort_order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "year_id", null: false
+    t.integer "term_id", null: false
+    t.integer "block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["block_id"], name: "index_sections_on_block_id"
+    t.index ["course_id"], name: "index_sections_on_course_id"
+    t.index ["term_id"], name: "index_sections_on_term_id"
+    t.index ["year_id"], name: "index_sections_on_year_id"
+  end
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
@@ -23,11 +50,36 @@ ActiveRecord::Schema.define(version: 2020_01_26_033817) do
     t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
   end
 
+  create_table "students", force: :cascade do |t|
+    t.string "guid"
+    t.string "preferred_name"
+    t.string "given_name"
+    t.string "family_name"
+    t.date "dob"
+    t.integer "cohort"
+    t.float "gpa"
+    t.datetime "gpa_updated"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guid"], name: "index_students_on_guid", unique: true
+  end
+
   create_table "term_names", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.integer "year_id", null: false
+    t.integer "term_name_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["term_name_id"], name: "index_terms_on_term_name_id"
+    t.index ["year_id"], name: "index_terms_on_year_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +100,10 @@ ActiveRecord::Schema.define(version: 2020_01_26_033817) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "sections", "blocks"
+  add_foreign_key "sections", "courses"
+  add_foreign_key "sections", "terms"
+  add_foreign_key "sections", "years"
+  add_foreign_key "terms", "term_names"
+  add_foreign_key "terms", "years"
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :students
+
   devise_for :users
 
   resources :sections
@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   #get 'progress/:id', to: 'progress#show'
   resources :progress
+  resources :students do
+    collection { post :import }
+  end
 
   root to: 'progress#show'
 end

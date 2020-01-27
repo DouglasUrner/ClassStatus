@@ -4,16 +4,18 @@ one:
   guid: MyString
   preferred_name: MyString
   given_name: MyString
+  family_name: MyString
   dob: 2020-01-26
   cohort: 
   gpa: 1.5
-  gpa_updated: 2020-01-26 18:03:53
+  gpa_updated: 2020-01-26 18:09:46
 
 two:
   guid: MyString
   preferred_name: MyString
   given_name: MyString
+  family_name: MyString
   dob: 2020-01-26
   cohort: 
   gpa: 1.5
-  gpa_updated: 2020-01-26 18:03:53
+  gpa_updated: 2020-01-26 18:09:46

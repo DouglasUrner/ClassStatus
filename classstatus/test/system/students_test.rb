@@ -16,6 +16,7 @@ class StudentsTest < ApplicationSystemTestCase
 
     fill_in "Cohort", with: @student.cohort
     fill_in "Dob", with: @student.dob
+    fill_in "Family name", with: @student.family_name
     fill_in "Given name", with: @student.given_name
     fill_in "Gpa", with: @student.gpa
     fill_in "Gpa updated", with: @student.gpa_updated
@@ -33,6 +34,7 @@ class StudentsTest < ApplicationSystemTestCase
 
     fill_in "Cohort", with: @student.cohort
     fill_in "Dob", with: @student.dob
+    fill_in "Family name", with: @student.family_name
     fill_in "Given name", with: @student.given_name
     fill_in "Gpa", with: @student.gpa
     fill_in "Gpa updated", with: @student.gpa_updated
