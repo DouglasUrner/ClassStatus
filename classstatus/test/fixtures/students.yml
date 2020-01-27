@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guid: MyString
+  preferred_name: MyString
+  given_name: MyString
+  dob: 2020-01-26
+  cohort: 
+  gpa: 1.5
+  gpa_updated: 2020-01-26 18:03:53
+
+two:
+  guid: MyString
+  preferred_name: MyString
+  given_name: MyString
+  dob: 2020-01-26
+  cohort: 
+  gpa: 1.5
+  gpa_updated: 2020-01-26 18:03:53

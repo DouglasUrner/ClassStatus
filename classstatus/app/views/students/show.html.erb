@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Guid:</strong>
+  <%= @student.guid %>
+</p>
+
+<p>
+  <strong>Preferred name:</strong>
+  <%= @student.preferred_name %>
+</p>
+
+<p>
+  <strong>Given name:</strong>
+  <%= @student.given_name %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @student.dob %>
+</p>
+
+<p>
+  <strong>Cohort:</strong>
+  <%= @student.cohort %>
+</p>
+
+<p>
+  <strong>Gpa:</strong>
+  <%= @student.gpa %>
+</p>
+
+<p>
+  <strong>Gpa updated:</strong>
+  <%= @student.gpa_updated %>
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>

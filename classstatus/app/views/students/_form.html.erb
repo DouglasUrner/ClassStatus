@@ -1,0 +1,19 @@
+
+<%= simple_form_for(@student) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class='form-inputs'>
+    <%= f.input :guid %>
+    <%= f.input :preferred_name %>
+    <%= f.input :given_name %>
+    <%= f.input :dob %>
+    <%= f.input :cohort %>
+    <%= f.input :gpa %>
+    <%= f.input :gpa_updated %>
+  </div>
+
+  <div class='form-actions'>
+    <%= f.button :submit, class: 'btn-primary' %>
+  </div>
+<% end %>
