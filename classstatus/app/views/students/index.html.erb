@@ -5,6 +5,7 @@
     <tr>
       <th>GUID</th>
       <th>Name</th>
+      <th>Sections</th>
       <th>Birthday</th>
       <th>Cohort</th>
       <th>GPA</th>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= student.guid %></td>
         <td><%= student.display_name %></td>
+        <td><%= student.section_list %></td>
         <td><%= student.dob %></td>
         <td><%= student.cohort %></td>
         <td><%= '%.2f' % student.gpa %></td>
