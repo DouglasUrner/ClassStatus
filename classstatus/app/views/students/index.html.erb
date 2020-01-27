@@ -41,7 +41,7 @@
 <%= form_tag import_students_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= select_tag :section,
-        options_from_collection_for_select(Section.order(:name), "id", "name"),
+        options_from_collection_for_select(Section.order(:block_id), "id", "name"),
         include_blank: "Select Section" %>
   <%= submit_tag "Import JSON" %>
 <% end %>
