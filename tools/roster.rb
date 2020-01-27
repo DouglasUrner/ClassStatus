@@ -49,11 +49,19 @@ def fix_dob(d)
 end
 
 first_time = true
+timestamp = File.mtime(ARGV[0])
 
 print "{\n\"students\": ["
 
+skip_lines = 7
+
 students = CSV.read(ARGV[0])
 students.each { |student|
+  if (skip_lines > 0)
+    skip_lines -= 1
+    next
+  end
+
   if (first_time == true)
     first_time = false
   else
@@ -72,7 +80,8 @@ students.each { |student|
   kv_pair("dob", dob, true)
   kv_pair("cohort", student[5], true)
   kv_pair("github_user", "", true)
-  kv_pair("gpa", student[3], false)
+  kv_pair("gpa", student[3], true)
+  kv_pair("gpa_updated", timestamp.to_s, false)
   print "\t}"
 }
 puts "]\n}"
