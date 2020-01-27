@@ -12,6 +12,7 @@ class SectionsController < ApplicationController
   # GET /sections/1
   # GET /sections/1.json
   def show
+    @enrollments = Enrollment.where(section_id: @section)
   end
 
   # GET /sections/new
