@@ -1,4 +1,7 @@
 class Student < ApplicationRecord
+  has_many :enrollments, dependent: :destroy
+  has_many :sections, through: :enrollments
+  
   validates :given_name,  presence: true
   validates :family_name, presence: true
 
