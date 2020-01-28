@@ -13,32 +13,34 @@ module ProgressHelper
     cols = 8
     row_lengths = [ 8, 8, 8, 6 ]
 
-    html = "<div class='seatmap'>\n"
+    indent = 4
+
+    html = "#{tab(indent)}<div class='seatmap'>\n" ; indent += 1
     rows.times do |r|
-      html += "<div class='seatmap-row'>\n"
+      html += "#{tab(indent)}<div class='seatmap-row'>\n" ; indent += 1
       row_lengths[r].times do |c|
         index = r * cols + c
         if (index < enrollments.length)
-          html += "<div class='area seat'>\n"
-            html += "<div class='student-item'>\n"
-              html += "<div class='student-content'>\n"
-                html += "#{r}.#{c}<br>\n"
-                html += "#{enrollments[index].student.display_name}\n"
-              html += "</div>\n"
-            html += "</div>\n"
+          html += "#{tab(indent)}<div class='area seat'>\n" ; indent += 1
+            html += "#{tab(indent)}<div class='student-item'>\n" ; indent += 1
+              html += "#{tab(indent)}<div class='student-content'>\n" ; indent += 1
+                html += "#{tab(indent)}#{r}.#{c}<br>\n"
+                html += "#{tab(indent)}#{enrollments[index].student.display_name}\n"
+              html += "#{tab(indent -= 1)}</div>\n"
+            html += "#{tab(indent -= 1)}</div>\n"
         else
-          html += "<div class='area seat empty-seat'>\n"
-            html += "#{r}.#{c}<br>\n"
+          html += "#{tab(indent)}<div class='area seat empty-seat'>\n" ; indent += 1
+            html += "#{tab(indent)}#{r}.#{c}<br>\n"
         end
-        html += "</div>\n"
+        html += "#{tab(indent -= 1)}</div>\n"
       end
       (cols - row_lengths[r]).times do |c|
-        html += "<div class='area seat not-a-seat'>\n"
-        html += "</div>\n"
+        html += "#{tab(indent)}<div class='area seat not-a-seat'>\n" ; indent += 1
+        html += "#{tab(indent -= 1)}</div>\n"
       end
-      html += "</div>\n"
+      html += "#{tab(indent -= 1)}</div>\n"
     end
-    html += "</div>\n"
+    html += "#{tab(indent -= 1)}</div>\n"
     html.html_safe
   end
 
