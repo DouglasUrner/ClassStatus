@@ -9,7 +9,28 @@ module SeatmapHelper
     html.html_safe
   end
 
+  def seating_chart_buttons
+    "<div class='seating-chart-buttons'>
+      <button type='button' class='btn button-save' name='save-button'>
+        Save</button>
+      <button type='button' class='btn button-clear' name='clear-button'>
+        Clear</button>
+      <button type='button' class='btn button-random' name='random-button'>
+        Random</button>
+    </div>".html_safe
+  end
+
   def empty_seatmap(rows, cols, row_lengths)
+    html = "<div class='seatmap'>\n"
+    rows.times do |r|
+      html += seatmap_row(cols, row_lengths[r])
+    end
+    html += "</div>\n"
+
+    html.html_safe
+  end
+
+  def seatmap(enrollments, rows, cols, row_lengths)
     html = "<div class='seatmap'>\n"
     rows.times do |r|
       html += seatmap_row(cols, row_lengths[r])

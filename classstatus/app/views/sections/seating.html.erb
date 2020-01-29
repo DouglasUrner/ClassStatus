@@ -1,5 +1,10 @@
-<%= unseated(@enrollments) %>
-<%= empty_seatmap(4, 8, [8, 8, 8, 6]) %>
+<div class="seating-chart">
+  <div class="seating-chart-sidebar">
+    <%= seating_chart_buttons %>
+    <%= unseated(@enrollments) %>
+  </div>
+  <%= empty_seatmap(4, 8, [8, 8, 8, 6]) %>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
@@ -32,21 +37,22 @@
   /**
    * Clear the seatmap.
    */
-  //var buttonClear = document.querySelector('.button-clear');
-  var buttonClear = document.querySelector('.unseated');
-  buttonClear.addEventListener('click', function() {
-    /**
-     * Loop through the seatmap and send them back to the unseated grid.
-     */
-    seatmap.forEach(function(grid) {
-      grid._items.forEach(function(stu) {
-        grid.send(stu, unseated, -1);
-      })
+  var buttonClear = document.querySelector('.button-clear');
+  if (buttonClear) {
+    buttonClear.addEventListener('click', function() {
+      /**
+       * Loop through the seatmap and send them back to the unseated grid.
+       */
+      seatmap.forEach(function(grid) {
+        grid._items.forEach(function(stu) {
+          grid.send(stu, unseated, -1);
+        })
+      });
+      unseated.sort('name', {
+        layout: 'instant'
+      });
     });
-    unseated.sort('name', {
-      layout: 'instant'
-    });
-  });
+  }
 
   /**
    * Randomly add the unseated students to the seatmap starting at the front
@@ -56,21 +62,22 @@
    *       are assigned. For example: front, back, and randomly (leaving random
    *       holes in the seatmap).
    */
-  //var buttonRandom = document.querySelector('.button-random');
-  var buttonRandom = document.querySelector('.unseated');
-  buttonRandom.addEventListener('click', function() {
-    for (i = seatmap.length - 1; i >= 0; i--) {
-      if (unseated._items.length > 0) {
-        if (seatmap[i]._items.length == 0) {
-          // Empty seat.
-          j = randomInt(0, unseated._items.length - 1);
-          console.log(j + " -> " + i);
-          unseated.send(unseated._items[j],
-            seatmap[i], 0);
+  var buttonRandom = document.querySelector('.button-random');
+  if (buttonRandom) {
+    buttonRandom.addEventListener('click', function() {
+      for (i = seatmap.length - 1; i >= 0; i--) {
+        if (unseated._items.length > 0) {
+          if (seatmap[i]._items.length == 0) {
+            // Empty seat.
+            j = randomInt(0, unseated._items.length - 1);
+            console.log(j + " -> " + i);
+            unseated.send(unseated._items[j],
+              seatmap[i], 0);
+          }
         }
       }
-    }
-  });
+    });
+  }
 
   /**
    * Return a random integer between min (inclusive) and max (inclusive).
@@ -86,10 +93,12 @@
       return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  //var buttonSave = document.querySelector('.button-save');
-  //buttonSave.addEventListener('click', function() {
-  //  alert('Save - not implemented yet.');
-  //});
+  var buttonSave = document.querySelector('.button-save');
+  if (buttonSave) {
+    buttonSave.addEventListener('click', function() {
+     alert('Save - not implemented yet.');
+    });
+  }
 
   /**
    * Muuri grid: names of students without seat assignments.
