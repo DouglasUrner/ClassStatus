@@ -130,17 +130,19 @@
    * adjusting the CSS in the beforeReceive() event handler.
    */
   .on('dragStart', function(item) {
-    item.getElement().style.width = 85 + 'px';
+    item.getElement().style.width = item.getWidth() + 'px';
     item.getElement().style.height = item.getHeight() + 'px';
   })
   .on('dragReleaseEnd', function(item) {
     item.getElement().style.width = '';
     item.getElement().style.height = '';
+  })
+  .on('beforeReceive', function(data) {
+    // TODO: get the width of the receiving grid (from data.toGrid)
+    data.item.getElement().style.width = data.toGrid._width + 'px';
+    data.item.getElement().style.height = '';
+    //console.log(data.toGrid._width);
   });
-  // .on('beforeReceive', function(item) {
-  //   item.getElement().style.width = '';
-  //   item.getElement().style.height = '';
-  // });
 
   areas.push(unseated);
 
