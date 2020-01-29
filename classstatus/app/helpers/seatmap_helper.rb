@@ -23,7 +23,7 @@ module SeatmapHelper
   def empty_seatmap(rows, cols, row_lengths)
     html = "<div class='seatmap'>\n"
     rows.times do |r|
-      html += seatmap_row(cols, row_lengths[r])
+      html += seatmap_row(r, cols, row_lengths[r])
     end
     html += "</div>\n"
 
@@ -33,17 +33,17 @@ module SeatmapHelper
   def seatmap(enrollments, rows, cols, row_lengths)
     html = "<div class='seatmap'>\n"
     rows.times do |r|
-      html += seatmap_row(cols, row_lengths[r])
+      html += seatmap_row(r, cols, row_lengths[r])
     end
     html += "</div>\n"
 
     html.html_safe
   end
 
-  def seatmap_row(cols, len)
+  def seatmap_row(row, cols, len)
     html = "<div class='seatmap-row'>\n"
     len.times do |c|
-      html += seat
+      html += seat(row, c)
     end
     (cols - len).times do
       html += not_a_seat
@@ -53,15 +53,15 @@ module SeatmapHelper
     html.html_safe
   end
 
-  def seat
-    html = "<div class='area seat'>\n"
+  def seat(r, c)
+    html = "<div class='area seat' data-seat-id='#{r}#{c}'>\n"
 
     html += "</div>\n"
   end
 
   def student_item(enrollment)
-    html =  "<div class='student-item'>\n"
-    html += "<div class='student-content'>\n"
+    html =  "<div class='student-item' data-student-id='#{enrollment.student_id}'>\n"
+    html += "<div class='student-content' data-student-id='#{enrollment.student_id}'>\n"
     html += "#{enrollment.student.display_name}\n"
     html += "</div>\n"
     html += "</div>\n"
