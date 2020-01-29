@@ -4,6 +4,8 @@ class SectionsController < ApplicationController
       :seating, :attendance, :progress]
   before_action :set_enrollments,
     only: [:show, :seating, :attendance, :progress]
+  before_action :check_for_students,
+    only: [:seating, :attendance, :progress]
 
   helper SeatmapHelper
 
@@ -89,18 +91,31 @@ class SectionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section
-      if (params[:id])
-        @section = Section.find(params[:id])
+      if (params[:id] == nil && session[:active_block])
+        params[:id] = session[:active_block]
       else
-        # TODO: preserve the section when it is specified so that it can
-        #       be defaulted. We might try to default the section based on
-        #       the current time.
-        @section = Section.find(1)
+        # TODO: try to infer the section based on the current time.
+        params[:id] = 1
       end
+      session[:active_block] = params[:id].to_i
+      @section = Section.find(params[:id])
     end
 
+    # Must be called after set_section
+    # TODO: handle error when params[:id] is not set, call set_section?
     def set_enrollments
       @enrollments = Enrollment.where(section_id: params[:id])
+    end
+
+    # Check that students have been imported.
+    def check_for_students
+      # TODO: set a message.
+      # TODO: handle on a per section basis?
+      if (!Student.exists?)
+        # First we need students, so when the students table is empty
+        # go to the import page.
+        redirect_to students_path
+      end
     end
 
     # Never trust parameters from the scary internet,
