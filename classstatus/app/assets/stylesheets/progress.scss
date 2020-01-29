@@ -1,6 +1,7 @@
-// Place all the styles related to the progress controller here.
+// Place all the styles related to the Sections controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
 
 /*
 ** Appearence
@@ -88,24 +89,29 @@
 }
 .student-item {
   display: block;
-  background-color: green;
-  border-radius: 8px;
 }
 .unseated .student-item {
   width: calc(100%);
   margin-bottom: 4px;
-  background-color: red;
 }
 .seat .student-item {
   width: 100%;
   height: 100%;
-  background-color: blue;
 }
 .student-content {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
+  background-color: green;
+  border-radius: 8px;
+}
+.unseated .student-content {
+  background-color: red;
+}
+.seat .student-content {
+  background-color: blue;
+  color: white;
 }
 
 /*

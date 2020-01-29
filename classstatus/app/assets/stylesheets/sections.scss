@@ -1,3 +1,122 @@
 // Place all the styles related to the Sections controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/*
+** Appearence
+*/
+.seating-chart {}
+.seating-chart-sidebar {}
+.seating-chart-buttons {}
+.unseated {
+  background-color: #AAA;
+  border-radius: 5px;
+}
+.seatmap {
+  background-color: #CCC;
+  border-radius: 5px;
+}
+.seatmap-row {}
+.seat {
+  background-color: #DDD;
+  border-radius: 10px;
+}
+.seat.empty-seat {
+  background-color: #BBB;
+}
+.not-a-seat {
+  background-color: #CCC;
+}
+.student-item {
+  background-color: #88F;
+  border-radius: 5px;
+}
+.student-content {}
+
+/*
+** Page layout
+*/
+.seating-chart {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+.seating-chart-sidebar {
+  width: calc(100% - 80% - 2%);
+  height: calc(96% - 48px); // HACK: hardcodes toolbar height
+  margin: 1%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.seating_chart_buttons {
+  width: calc(100%);
+  height: calc(12%);
+  display: flex;
+  justify-content: space-between;
+}
+.unseated {
+  width: calc(100%);
+  height: calc(96% - 12% - 48px); // HACK: hardcodes toolbar height
+  min-height: 20%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.seatmap {
+  width: calc(100% - 20% - 2%);
+  height: calc(96% - 48px); // HACK: hardcodes toolbar height
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.seatmap-row {
+  width: 100%;
+  height: calc(25% - 1%);
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-bottom: 1%;
+}
+.seat, .not-a-seat {
+  width: calc(100%/8 - 8px);
+  height: calc(100% - 8px);
+  min-height: calc(100% - 8px);
+  margin: 4px 4px 4px 4px;
+  flex: 1;
+}
+.student-item {
+  display: block;
+  border-radius: 8px;
+}
+.unseated .student-item {
+  width: calc(100%);
+  margin-bottom: 4px;
+}
+.seat .student-item {
+  width: 100%;
+  height: 100%;
+}
+.student-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: green;
+}
+.unseated .student-content {
+  background-color: red;
+}
+.seat .student-content {
+  background-color: blue;
+  color: white;
+}
+
+/*
+** Muuri required CSS
+*/
+.area { position: relative; }
+.student-item { position: absolute; }
+.student-content { position: relative; }
