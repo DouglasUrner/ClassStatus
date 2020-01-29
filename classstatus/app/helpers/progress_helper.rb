@@ -13,9 +13,12 @@ module ProgressHelper
     cols = 8
     row_lengths = [ 8, 8, 8, 6 ]
 
-    indent = 4
+    html = ""
 
-    html = "#{tab(indent)}<div class='seatmap'>\n" ; indent += 1
+    indent = 4
+    html += "#{tab(indent)}<div class='area unseated'></div>\n"
+
+    html += "#{tab(indent)}<div class='seatmap'>\n" ; indent += 1
     rows.times do |r|
       html += "#{tab(indent)}<div class='seatmap-row'>\n" ; indent += 1
       row_lengths[r].times do |c|
@@ -29,13 +32,17 @@ module ProgressHelper
               html += "#{tab(indent -= 1)}</div>\n"
             html += "#{tab(indent -= 1)}</div>\n"
         else
-          html += "#{tab(indent)}<div class='area seat empty-seat'>\n" ; indent += 1
-            html += "#{tab(indent)}#{r}.#{c}<br>\n"
+          html += "#{tab(indent)}<div class='area seat'>\n" ; indent += 1
+            html += "#{tab(indent)}<div class='student-item empty-seat'>\n" ; indent += 1
+              html += "#{tab(indent)}<div class='student-content'>\n" ; indent += 1
+                html += "#{tab(indent)}#{r}.#{c}<br>\n"
+              html += "#{tab(indent -= 1)}</div>\n"
+            html += "#{tab(indent -= 1)}</div>\n"
         end
         html += "#{tab(indent -= 1)}</div>\n"
       end
       (cols - row_lengths[r]).times do |c|
-        html += "#{tab(indent)}<div class='area seat not-a-seat'>\n" ; indent += 1
+        html += "#{tab(indent)}<div class='not-a-seat'>\n" ; indent += 1
         html += "#{tab(indent -= 1)}</div>\n"
       end
       html += "#{tab(indent -= 1)}</div>\n"
