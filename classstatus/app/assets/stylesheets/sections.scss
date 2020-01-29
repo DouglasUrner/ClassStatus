@@ -61,6 +61,8 @@
   width: calc(100%);
   height: calc(96% - 12% - 48px); // HACK: hardcodes toolbar height
   min-height: 20%;
+  margin-top: 2%;
+  padding-top: 2%; // Thwarted by absolute positioning?
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
