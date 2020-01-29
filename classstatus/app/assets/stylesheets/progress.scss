@@ -5,7 +5,9 @@
 /*
 ** Appearence
 */
-
+.seating-chart {}
+.seating-chart-sidebar {}
+.seating-chart-buttons {}
 .unseated {
   background-color: #AAA;
   border-radius: 5px;
@@ -14,9 +16,10 @@
   background-color: #CCC;
   border-radius: 5px;
 }
+.seatmap-row {}
 .seat {
   background-color: #DDD;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .seat.empty-seat {
   background-color: #BBB;
@@ -28,46 +31,58 @@
   background-color: #88F;
   border-radius: 5px;
 }
+.student-content {}
 
 /*
 ** Page layout
 */
 .seating-chart {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: space-between;
 }
 .seating-chart-sidebar {
+  width: calc(100% - 80% - 2%);
+  height: calc(96% - 48px); // HACK: hardcodes toolbar height
+  margin: 1%;
   display: flex;
-
+  justify-content: flex-start;
   flex-direction: column;
 }
 .seating_chart_buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  height: calc(12%);
+  width: calc(100%);
 }
 .unseated {
-  width: 15%;
-  height: calc(96vh - 48px); // HACK: hardcodes toolbar height
+  width: calc(100% - 20% - 2%);
+  height: calc(96% - 12% - 48px); // HACK: hardcodes toolbar height
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 .seatmap {
   width: 80%;
+  width: calc(100% - 20% - 2%);
+  height: calc(96% - 48px); // HACK: hardcodes toolbar height
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: calc(96vh - 48px); // HACK: hardcodes toolbar height
 }
 .seatmap-row {
+  width: 100%;
+  height: calc(25% - 1%);
   display: flex;
+  justify-content: space-between;
   flex-grow: 1;
+  margin-bottom: 1%;
 }
 .seat, .not-a-seat {
-  width: 12%;
-  height: 22vh;
-  min-height: 18vh;
+  width: calc(100%/8 - 8px);
+  height: calc(100% - 8px);
+  min-height: calc(100% - 8px);
   margin: 4px 4px 4px 4px;
   flex: 1;
 }
@@ -75,8 +90,8 @@
   display: block;
 }
 .unseated.student-item {
-  width: 90%;
-  margin-bottom: 5px;
+  width: calc(100% - 8px);
+  margin: 4px;
 }
 .seat.student-item {
   width: 100%;
