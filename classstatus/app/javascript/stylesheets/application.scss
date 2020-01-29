@@ -1,4 +1,8 @@
 @import "~bootstrap/scss/bootstrap"; // Never forget the semicolon...
 @import "./_custom";
+// TODO: find way to pull in all of app/assets/stylesheets. Is there a way to
+//       do globbing or to write a loop here?
+// TODO: research speeding up or bypassing compilation process in development.
 @import "stylesheets/home";
 @import "stylesheets/progress";
+@import "stylesheets/sections";
