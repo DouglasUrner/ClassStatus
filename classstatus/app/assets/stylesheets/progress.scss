@@ -20,7 +20,7 @@
 .seat.empty-seat {
   background-color: #BBB;
 }
-.seat.not-a-seat {
+.not-a-seat {
   background-color: #CCC;
 }
 .student-item {
@@ -31,6 +31,10 @@
 /*
 ** Page layout
 */
+.unseated {
+  height: calc(100vh - 48px); // HACK: hardcodes toolbar height
+  display: flex;
+}
 .seatmap {
   width: 100%;
   display: flex;
@@ -41,8 +45,9 @@
   display: flex;
   flex-grow: 1;
 }
-.seat {
+.seat, .not-a-seat {
   height: auto;
+  min-height: 20px;
   margin: 4px 4px 4px 4px;
   flex: 1;
 }
