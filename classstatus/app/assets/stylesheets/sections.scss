@@ -44,7 +44,7 @@
   justify-content: space-between;
 }
 .seating-chart-sidebar {
-  width: calc(100% - 80% - 2%);
+  width: calc(100% - 78% - 2%);
   height: calc(96% - 48px); // HACK: hardcodes toolbar height
   margin: 1%;
   display: flex;
@@ -66,7 +66,7 @@
   flex-direction: column;
 }
 .seatmap {
-  width: calc(100% - 20% - 2%);
+  width: calc(100% - 18% - 2%);
   height: calc(96% - 48px); // HACK: hardcodes toolbar height
   display: flex;
   justify-content: space-around;

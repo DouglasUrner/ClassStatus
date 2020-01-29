@@ -11,12 +11,12 @@ module SeatmapHelper
 
   def seating_chart_buttons
     "<div class='seating-chart-buttons'>
-      <button type='button' class='btn button-save' name='save-button'>
+      <button type='button' class='button-save btn btn-primary' name='save-button'>
         Save</button>
-      <button type='button' class='btn button-clear' name='clear-button'>
+      <button type='button' class='button-clear btn btn-secondary' name='clear-button'>
         Clear</button>
-      <button type='button' class='btn button-random' name='random-button'>
-        Random</button>
+      <button type='button' class='button-random btn btn-secondary' name='random-button'>
+        Rand</button>
     </div>".html_safe
   end
 
