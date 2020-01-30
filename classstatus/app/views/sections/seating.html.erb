@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
   var allSeats = [].slice.call(document.querySelectorAll('.seat'));
-  //alert("allSeats.length = " + allSeats.length)
+  alert("allSeats.length = " + allSeats.length)
 
   /**
    * All of the grids, used as the return value from the dragSort function.
@@ -70,7 +70,7 @@
           if (seatmap[i]._items.length == 0) {
             // Empty seat.
             j = randomInt(0, unseated._items.length - 1);
-            console.log(j + " -> " + i);
+            // console.log(j + " -> " + i);
             unseated.send(unseated._items[j],
               seatmap[i], 0);
           }
@@ -93,10 +93,14 @@
       return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  /**
+   * Save seating layout (persist to database)
+   */
   var buttonSave = document.querySelector('.button-save');
   if (buttonSave) {
     buttonSave.addEventListener('click', function() {
-     alert('Save - not implemented yet.');
+      saveLayout(seatmap);
+      alert('Save - not implemented yet.');
     });
   }
 
@@ -116,32 +120,32 @@
       return areas;
     }
   })
-
   /**
    * When dragging set the object dimensions to fixed values so that they won't
-   * scale themselves to the containing object as they move. This works because we
-   * are adding the style property to the element (so it overrides the CSS
+   * scale themselves to the containing object as they move. This works because
+   * we are adding a style property to the element (so it overrides the CSS
    * styling, then when we remove it, the CSS is still there and reasserts
    * itself).
-   *
-   * TODO: It appears that when you change the size of a student tile as you move
-   * them between the seating area and the unseated area (which can shrink the
-   * tile) Muuuri allocates space for the larger size. Try fixing this by
-   * adjusting the CSS in the beforeReceive() event handler.
    */
   .on('dragStart', function(item) {
     item.getElement().style.width = item.getWidth() + 'px';
     item.getElement().style.height = item.getHeight() + 'px';
+    console.log("dragStart: item => " + item);
   })
   .on('dragReleaseEnd', function(item) {
     item.getElement().style.width = '';
     item.getElement().style.height = '';
+    console.log("dragReleaseEnd: item => " + item);
   })
   .on('beforeReceive', function(data) {
     // TODO: get the width of the receiving grid (from data.toGrid)
     data.item.getElement().style.width = data.toGrid._width + 'px';
     data.item.getElement().style.height = '';
+    console.log("beforeReceive: data => " + data);
     //console.log(data.toGrid._width);
+  })
+  .on('receive', function(data) {
+    console.log("receive: data => " + data);
   });
 
   areas.push(unseated);
@@ -161,6 +165,22 @@
         return areas;
       },
     })
+    .on('dragStart', function(item) {
+      item.getElement().style.width = item.getWidth() + 'px';
+      item.getElement().style.height = item.getHeight() + 'px';
+    })
+    .on('beforeReceive', function(data) {
+      data.item.getElement().style.width = data.toGrid._width + 'px';
+      data.item.getElement().style.height = '';
+    })
+    .on('dragReleaseEnd', function(item) {
+      item.getElement().style.width = '';
+      item.getElement().style.height = '';
+    })
+    .on('receive', function(data) {
+
+    });
+
     areas.push(seat);
     seatmap.push(seat);
   });
@@ -178,16 +198,16 @@
    * could be given individual id values.
    */
 
-  //console.log(areas[0]);
+  // console.log(areas[0]);
 
-  // var layout = window.localStorage.getItem('layout');
-  //
+  var layout = window.localStorage.getItem('layout');
+
   // if (layout) {
   //   loadLayout(grid, layout);
   // } else {
   //   grid.layout(true);
   // }
-  //
+
   // function loadLayout(grid, serializedLayout) {
   //   var layout = JSON.parse(serializedLayout);
   //   var currentItems = grid.getItems();
@@ -207,17 +227,21 @@
   //   }
   //   grid.sort(newItems, {layout: 'instant'});
   // }
-  //
-  // function saveLayout(grid) {
-  //   var layout = serializeLayout(grid);
-  //   window.localStorage.setItem('layout', layout);
-  // }
-  //
-  // function serializeLayout(grid) {
-  //   var itemIds = grid.getItems().map(function (item) {
-  //     return item.getElement().getAttribute('data-seat-position');
-  //   });
-  //   return JSON.stringify(itemIds);
-  // }
+
+  function saveLayout(grid) {
+    console.log("seatmap.length = " + seatmap.length);
+    console.log("grid.length = " + grid.length);
+    console.log(seatmap[0]);
+    console.log(grid[0]);
+    // var layout = serializeLayout(grid);
+    // window.localStorage.setItem('layout', layout);
+  }
+
+  function serializeLayout(grid) {
+    var itemIds = grid.getItems().map(function (item) {
+      return item.getElement().getAttribute('data-seat-position');
+    });
+    return JSON.stringify(itemIds);
+  }
 
 </script>
