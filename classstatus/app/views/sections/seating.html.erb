@@ -12,13 +12,13 @@
 
 <script type="text/javascript">
   var allSeats = [].slice.call(document.querySelectorAll('.seat'));
-  alert("allSeats.length = " + allSeats.length)
 
   /**
    * All of the grids, used as the return value from the dragSort function.
    * @type {Array}
    */
   var areas = [];
+
   /**
    * Just the grids in the seat map (i.e., each individual seat).
    * @type {Array}
@@ -99,8 +99,8 @@
   var buttonSave = document.querySelector('.button-save');
   if (buttonSave) {
     buttonSave.addEventListener('click', function() {
-      saveLayout(seatmap);
-      alert('Save - not implemented yet.');
+      saveLayout(seatmap, 'data-student-id');
+      //alert('Save - not implemented yet.');
     });
   }
 
@@ -130,22 +130,33 @@
   .on('dragStart', function(item) {
     item.getElement().style.width = item.getWidth() + 'px';
     item.getElement().style.height = item.getHeight() + 'px';
-    console.log("dragStart: item => " + item);
+    // console.log("dragStart: item => " + item);
   })
   .on('dragReleaseEnd', function(item) {
     item.getElement().style.width = '';
     item.getElement().style.height = '';
-    console.log("dragReleaseEnd: item => " + item);
+    // console.log("dragReleaseEnd: item => " + item);
   })
   .on('beforeReceive', function(data) {
     // TODO: get the width of the receiving grid (from data.toGrid)
     data.item.getElement().style.width = data.toGrid._width + 'px';
     data.item.getElement().style.height = '';
-    console.log("beforeReceive: data => " + data);
+    // console.log("beforeReceive: data => " + data);
     //console.log(data.toGrid._width);
   })
+  .on('move', function(data) {
+    // console.log("move: data => " + data);
+    // Seems like it should work, but it doesn't...
+    // unseated.sort('name', {
+    //   layout: 'instant'
+    // });
+  })
   .on('receive', function(data) {
-    console.log("receive: data => " + data);
+    // console.log("receive: data => " + data);
+    // Seems like it should work, but it doesn't...
+    // unseated.sort('name', {
+    //   layout: 'instant'
+    // });
   });
 
   areas.push(unseated);
@@ -168,6 +179,7 @@
     .on('dragStart', function(item) {
       item.getElement().style.width = item.getWidth() + 'px';
       item.getElement().style.height = item.getHeight() + 'px';
+      console.log("dragging from seat: height = " + item.getElement().style.height);
     })
     .on('beforeReceive', function(data) {
       data.item.getElement().style.width = data.toGrid._width + 'px';
@@ -178,7 +190,6 @@
       item.getElement().style.height = '';
     })
     .on('receive', function(data) {
-
     });
 
     areas.push(seat);
@@ -202,22 +213,46 @@
 
   var layout = window.localStorage.getItem('layout');
 
-  // if (layout) {
-  //   loadLayout(grid, layout);
-  // } else {
-  //   grid.layout(true);
-  // }
+  if (layout) {
+    loadLayout(seatmap, unseated, layout, 'data-student-id');
+  } else {
+    seatmap.layout(true);
+  }
 
-  // function loadLayout(grid, serializedLayout) {
-  //   var layout = JSON.parse(serializedLayout);
-  //   var currentItems = grid.getItems();
-  //   var currentItemIds = currentItems.map(function (item) {
-  //     return item.getElement().getAttribute('seat')
-  //   });
-  //   var newItems = [];
-  //   var itemId;
-  //   var itemIndex;
-  //
+  /**
+   * [loadLayout description]
+   * @param  {object or array of objects} gridOrGrids [Muuri grid or grid array]
+   * @param  {string} serializedLayout [serialized JSON holding the layout]
+   * @param  {string} attribute        [HTML attribute to look for]
+   * @return {void}
+   *
+   * Loop over the serializeLayout placing objects from the source grid into
+   * the target grid using attribute as the key by which to identify the
+   * objects in the source grid. The source and target grids may be the same
+   * grid. The target grid must be an array of grids if serializeLayout is an
+   * array of arrays.
+   *
+   * Use the unseated grid as the source, loop over the saved layout finding
+   * each item in the unsteated grid and sending it to the postion in the
+   * seatmap that corresponds to the index in the layout. For attendance and
+   * progress the seating chart can be generated with the display property of
+   * the sidebar set to hidden.
+   */
+
+  function loadLayout(target, source, serializedLayout, attribute) {
+    var layout = JSON.parse(serializedLayout);
+    var currentItems = source.getItems();
+    var currentItemIds = currentItems.map(function (item) {
+      return item.getElement().getAttribute(attribute)
+    });
+    var newItems = [];
+    var itemId;
+    var itemIndex;
+
+   /*
+    * Loop over the saved layout and instantiate each item in the corresponding
+    * grid of the target grid.
+    */
   //   for (var i = 0; i < layout.length; i++) {
   //     itemId = layout[i];
   //     itemIndex = currentItemIds.indexOf(itemId);
@@ -226,21 +261,33 @@
   //     }
   //   }
   //   grid.sort(newItems, {layout: 'instant'});
-  // }
-
-  function saveLayout(grid) {
-    console.log("seatmap.length = " + seatmap.length);
-    console.log("grid.length = " + grid.length);
-    console.log(seatmap[0]);
-    console.log(grid[0]);
-    // var layout = serializeLayout(grid);
-    // window.localStorage.setItem('layout', layout);
   }
 
-  function serializeLayout(grid) {
-    var itemIds = grid.getItems().map(function (item) {
-      return item.getElement().getAttribute('data-seat-position');
-    });
+  function saveLayout(grid, attribute) {
+    // TODO: need a layout per section. Would be nice to have the abilty
+    //       to store historical layouts.
+    var layout = serializeLayout(grid, attribute);
+    console.log(layout);
+    window.localStorage.setItem('layout', layout);
+  }
+
+  function serializeLayout(gridOrGrids, attribute) {
+    var itemIds;
+    if (true) {
+      // grid is an array of grids.
+      itemIds = [];
+      gridOrGrids.forEach((grid, i) => {
+        attr = grid.getItems().map(function (item) {
+          return item.getElement().getAttribute(attribute);
+        });
+        itemIds.push(attr);
+      });
+    } else {
+      itemIds = gridOrGrids.getItems().map(function (item) {
+        return item.getElement().getAttribute(attribute);
+      });
+    }
+    // console.log(itemIds);
     return JSON.stringify(itemIds);
   }
 
