@@ -1,8 +1,13 @@
 module SeatmapHelper
-  def unseated(enrollments)
+  def unseated
+    total_seats = 30 # XXX: this should get passed in or something...
+
     html = "<div class='area unseated'>\n"
-    enrollments.each do |e|
+    @enrollments.each do |e|
       html += student_item(e)
+    end
+    (total_seats - @enrollments.length).times do
+      html += empty_seat
     end
     html += "</div>\n"
 
@@ -30,7 +35,7 @@ module SeatmapHelper
     html.html_safe
   end
 
-  def seatmap(enrollments, rows, cols, row_lengths)
+  def seatmap(rows, cols, row_lengths)
     html = "<div class='seatmap'>\n"
     rows.times do |r|
       html += seatmap_row(r, cols, row_lengths[r])
@@ -59,17 +64,22 @@ module SeatmapHelper
     html += "</div>\n"
   end
 
-  def student_item(enrollment)
-    html =  "<div class='student-item' data-student-id='#{enrollment.student_id}'>\n"
-    html += "<div class='student-content' data-student-id='#{enrollment.student_id}'>\n"
-    html += "#{enrollment.student.display_name}\n"
+  ###
+  # Generate one student tile.
+  # @type {Enrollment}
+  #
+  def student_item(e)
+    html =  "<div class='student-item' data-student-id='#{e.student_id}'>\n"
+    html += "<div class='student-content' data-student-id='#{e.student_id}'>\n"
+    html += "#{e.student.display_name}\n"
     html += "</div>\n"
     html += "</div>\n"
   end
 
   def empty_seat
     html =  "<div class='student-item empty-seat'>\n"
-    html += "<div class='student-content'>\n"
+    html += "<div class='student-content empty-seat'>\n"
+    html += "&nbsp\n" # Force item to have some vertical height.
     html += "</div>\n"
     html += "</div>\n"
   end
