@@ -94,6 +94,7 @@
 }
 .unseated .student-item {
   width: calc(100%);
+  min-height: calc((100% - 29 * 3px) / 30);
   margin-bottom: 4px;
 }
 .seat .student-item {
@@ -114,6 +115,9 @@
 .seat .student-content {
   background-color: blue;
   color: white;
+}
+.student-item .empty-seat {
+  background-color: #336699;
 }
 
 /*
