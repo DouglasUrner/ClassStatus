@@ -43,9 +43,26 @@ def clean_name(n)
 end
 
 def fix_dob(d)
-  dmy = d.split('/')
-  y = (dmy[2] < "20") ? "20" + dmy[2] : "19" + dmy[2]
-  y + '-' + dmy[0] + '-' + dmy[1]
+  # Dates is Skyward are not consistant some are MM/DD/YY, others are
+  # YYYY-MM-DD. Handle both.
+  ymd = ""
+  if (d.match('/'))
+    dmy = d.split('/')
+    y = (dmy[2] < "20") ? "20" + dmy[2] : "19" + dmy[2]
+    ymd = y + '-' + dmy[0] + '-' + dmy[1]
+  elsif (d.match('-'))
+    ymd = d
+  end
+  ymd
+end
+
+def fix_guid(guid)
+  # Our GUIDs start with 0 (most of the time) and are seven digits long.
+  # Make it so...
+  if (guid.length != 7 && guid[0] != '0')
+    guid = '0' + guid
+  end
+  guid
 end
 
 first_time = true
@@ -71,9 +88,10 @@ students.each { |student|
   names = clean_name(student[0])
   dob = fix_dob(student[2])
   gender = student[4] == 'Male' ? 'M' : 'F'
+  guid = fix_guid(student[1])
 
   print "{\n"
-  kv_pair("guid", student[1], true)
+  kv_pair("guid", guid, true)
   kv_pair("given_name", names[1], true)
   kv_pair("family_name", names[3], true)
   kv_pair("gender", gender, true)
