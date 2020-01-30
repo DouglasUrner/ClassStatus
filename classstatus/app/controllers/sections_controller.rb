@@ -91,11 +91,12 @@ class SectionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section
-      if (params[:id] == nil && session[:active_block])
+      if (params[:id] == nil)
         params[:id] = session[:active_block]
-      else
-        # TODO: try to infer the section based on the current time.
-        params[:id] = 1
+        if (session[:active_block])
+          # TODO: try to infer the section based on the current time.
+          params[:id] = 1
+        end
       end
       session[:active_block] = params[:id].to_i
       @section = Section.find(params[:id])
