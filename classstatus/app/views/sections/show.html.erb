@@ -4,7 +4,7 @@
 <table>
   <% @enrollments.each do |e| %>
     <tr>
-      <td><%= e.student.given_name %> <%= e.student.family_name %></td>
+      <td><%= link_to e.student.display_name, edit_student_path(e.student.id) %></td>
     </tr>
   <% end %>
 </table>
