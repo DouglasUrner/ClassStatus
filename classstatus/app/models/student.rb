@@ -5,6 +5,10 @@ class Student < ApplicationRecord
   validates :given_name,  presence: true
   validates :family_name, presence: true
 
+  def name
+    display_name
+  end
+
   def display_name
     "#{preferred_name ? preferred_name : given_name} #{family_name}"
   end
