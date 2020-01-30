@@ -15,8 +15,8 @@
   <tbody>
     <% @enrollments.each do |enrollment| %>
       <tr>
-        <td><%= enrollment.student %></td>
-        <td><%= enrollment.section %></td>
+        <td><%= enrollment.student.display_name %></td>
+        <td><%= enrollment.section.short_name %></td>
         <td><%= enrollment.status %></td>
         <td><%= link_to 'Show', enrollment %></td>
         <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %></td>
