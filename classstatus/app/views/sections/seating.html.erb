@@ -1,4 +1,4 @@
-<div class="seating-chart">
+<div class="seating-chart" id="seating-chart" data-section-id="<%= params[:id] %>">
   <div class="seating-chart-sidebar">
     <%= seating_chart_buttons %>
     <%= unseated %>
@@ -11,6 +11,9 @@
 <script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>
 
 <script type="text/javascript">
+  var section_id =
+    document.querySelector('#seating-chart').getAttribute('data-section-id');
+
   var allSeats = [].slice.call(document.querySelectorAll('.seat'));
 
   /**
@@ -99,7 +102,8 @@
   var buttonSave = document.querySelector('.button-save');
   if (buttonSave) {
     buttonSave.addEventListener('click', function() {
-      saveLayout(seatmap, 'data-student-id');
+      // console.log("sectionId = " + sectionId);
+      saveLayout(section_id, seatmap, 'data-student-id');
       //alert('Save - not implemented yet.');
     });
   }
@@ -211,12 +215,19 @@
 
   // console.log(areas[0]);
 
-  var layout = window.localStorage.getItem('layout');
+  var layout = window.localStorage.getItem('layout-' + section_id);
 
   if (layout) {
+    console.log(layout);
     loadLayout(seatmap, unseated, layout, 'data-student-id');
-  } else {
+  } else if (!true) {
+    // seatmap is a grid
     seatmap.layout(true);
+  } else {
+    // seatmap is an array of grids
+    seatmap.forEach((grid, i) => {
+      grid.layout(true);
+    });
   }
 
   /**
@@ -240,11 +251,9 @@
    */
 
   function loadLayout(target, source, serializedLayout, attribute) {
+    console.log("loadLayout: serializedLayout = " + serializedLayout);
     var layout = JSON.parse(serializedLayout);
-    var currentItems = source.getItems();
-    var currentItemIds = currentItems.map(function (item) {
-      return item.getElement().getAttribute(attribute)
-    });
+    //console.log("sourceItemsIds = " + sourceItemsIds);
     var newItems = [];
     var itemId;
     var itemIndex;
@@ -253,22 +262,44 @@
     * Loop over the saved layout and instantiate each item in the corresponding
     * grid of the target grid.
     */
-  //   for (var i = 0; i < layout.length; i++) {
+   layout.forEach((grid, i) => {
+     grid.forEach((s, j) => {
+       if (s == null) {
+         return;
+       }
+       var sourceItems = source.getItems();
+       var sourceItemsIds = sourceItems.map(function (item) {
+         return item.getElement().getAttribute(attribute)
+       });
+       console.log("s = " + s + ", j = " + j + ", i = " + i);
+       // XXX: need to be sure that there isn't more than one student in seat.
+       student_id = s[j];
+       sourceIndex = sourceItemsIds.indexOf(s); // XXX
+       if (sourceIndex > -1) {
+         //newItems.push(sourceItems[itemIndex])
+         console.log(student_id + ": " + sourceIndex + " -> " + i);
+         source.send(sourceIndex, target[i], j);
+       }
+     });
+   });
+
+  //  for (var i = 0; i < layout.length; i++) {
   //     itemId = layout[i];
-  //     itemIndex = currentItemIds.indexOf(itemId);
+  //     itemIndex = csourceItemsIds.indexOf(itemId);
   //     if (itemIndex > -1) {
-  //       newItems.push(currentItems[itemIndex])
+  //       newItems.push(sourceItems[itemIndex])
   //     }
-  //   }
+  //  }
   //   grid.sort(newItems, {layout: 'instant'});
   }
 
-  function saveLayout(grid, attribute) {
+  function saveLayout(section_id, grid, attribute) {
     // TODO: need a layout per section. Would be nice to have the abilty
     //       to store historical layouts.
     var layout = serializeLayout(grid, attribute);
     console.log(layout);
-    window.localStorage.setItem('layout', layout);
+    var layoutName = 'layout-' + section_id;
+    window.localStorage.setItem(layoutName, layout);
   }
 
   function serializeLayout(gridOrGrids, attribute) {
