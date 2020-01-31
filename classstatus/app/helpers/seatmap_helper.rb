@@ -21,7 +21,7 @@ module SeatmapHelper
       <button type='button' class='button-clear btn btn-secondary' name='clear-button'>
         Clear</button>
       <button type='button' class='button-random btn btn-secondary' name='random-button'>
-        Rand</button>
+        #{@enrollments.length}</button>
     </div>".html_safe
   end
 
