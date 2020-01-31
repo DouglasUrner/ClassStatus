@@ -4,13 +4,18 @@
     <div class='navbar-brand'>
       <div class='dropdown'>
                 <button class="btn btn-default dropdown-toggle" type="button"
-          id='progress-section-picker' data-toggle="dropdown"
+          id='section-progress-picker' data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="true">
-            <span id='navbar-current-section'>Select Section</span>
-            <span class="caret"></span>
+            <% if controller_name == 'sections' %>
+              <span id='navbar-current-section'><%= Section.find(params[:id]).short_name %></span>
+              <span class="caret"></span>
+            <% else %>
+              <span id='navbar-current-section'>Select Section</span>
+              <span class="caret"></span>
+            <% end %>
           </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= progress_section_picker %>
+          <%= section_progress_picker %>
         </div>
       </div>
     </div>
@@ -26,16 +31,21 @@
 
       <ul class="navbar-nav mr-auto">
 
-        <li class="nav-item active">
-          <%= link_to 'Home', root_path, class: 'nav-link' %>
-          <!-- a class="nav-link" href="#">
-            Home <span class="sr-only">(current)</span>
-          </a -->
-        </li>
+        <% if controller_name == 'sections' %>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+          <li class="nav-item active">
+            <%= link_to 'Progress', progress_section_path(params[:id]), class: 'nav-link' %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'Attendance', attendance_section_path(params[:id]), class: 'nav-link' %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'Seating', seating_section_path(params[:id]), class: 'nav-link' %>
+          </li>
+
+        <% end %>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"
@@ -50,17 +60,12 @@
             <div class="dropdown-divider"></div>
             <%= link_to 'Courses',   courses_path,    class: 'dropdown-item' %>
             <%= link_to 'Sections',  sections_path,   class: 'dropdown-item' %>
-            <a class="dropdown-item" href="#">Assign Seats</a>
             <%= link_to 'Terms',     terms_path,      class: 'dropdown-item' %>
             <%= link_to 'TermNames', term_names_path, class: 'dropdown-item' %>
             <%= link_to 'Years',     years_path,      class: 'dropdown-item' %>
             <%= link_to 'Blocks',    blocks_path,     class: 'dropdown-item' %>
           </div>
         </li>
-
-        <!-- li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li -->
 
       </ul>
 
