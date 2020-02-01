@@ -104,8 +104,8 @@ module SeatmapHelper
   def student_tile(e)
     html  = "<div class='student-tile'>\n"
 
-    html += "<div class='student-identify'>\n"
-    html += "#{e.student.display_name}\n"
+    html += "<div class='student-identity'>\n"
+    html += "<p>#{e.student.display_name}</p>\n"
     html += "</div>\n"
 
     html += "<div class='student-progress'>\n"
@@ -118,7 +118,7 @@ module SeatmapHelper
   def student_tile_varient(e)
     html  = "<div class='student-tile'>\n"
 
-    html += "<div class='student-identify'>\n"
+    html += "<div class='student-identity'>\n"
     html += "#{e.student.display_name}\n"
     html += "</div>\n"
 
@@ -131,17 +131,66 @@ module SeatmapHelper
 
   def annunciator_bar(e)
     html  = "<div class='annunciator-bar'>\n"
-    html += annunciator_cohort(e)
-    html += annunciator_gpa(e)
+    html += annunciator_basic(e)
     html += annunciator_spare
     html += annunciator_spare
-    html += annunciator_spare
+    html += annunciator_attendance(e)
+    html += "</div>\n"
+  end
+
+  def annunciator_basic(e)
+    klass = "class='annunciator annunciator-cohort'"
+    color = gpa_to_color(e)
+    style = "style=\'border-color: #{color}\'"
+    html  = "<div #{klass} #{style}>\n"
+    html += "<div>#{e.student.cohort.to_s[3]}</div>"
+    html += "</div>\n"
+  end
+
+  def annunciator_cohort(e)
+    html  = "<div class='annunciator annunciator-cohort'>\n"
+    html += "<div>#{e.student.cohort.to_s[3]}</div>"
     html += "</div>\n"
   end
 
   def annunciator_gpa(e)
-    klass = 'annunciator annunciator-gpa'
+    klass = "class='annunciator annunciator-gpa'"
+    color = gpa_to_color(e)
+    style = "style=\'background-color: #{color}\'"
+    html  = "<div #{klass} #{style}>\n"
+    html += "&nbsp;"
+    html += "</div>\n"
+  end
+
+  # Display with shading for general sense with
+  # stats in a tool tip.
+  def annunciator_attendance(e)
+    klass = "class='annunciator annunciator-attendance'"
+
     color = 'pink'
+    color = case e.student.all_absences
+    when    0 ; 'blue'
+    when 0..2 ; 'green'
+    when 2..4 ; 'yellow'
+    when 4..6 ; 'orange'
+    when 6..  ; 'red'
+    end
+    style = "style=\'background-color: #{color}\'"
+
+    tooltip = "data-toggle='tooltip' title=\'#{e.student.attendance_stats}\'"
+
+    html  = "<div #{klass} #{style} #{tooltip}>\n"
+    html += "<div>#{e.student.recent_absences(5)}</div>"
+    html += "</div>\n"
+  end
+
+  def annunciator_spare
+    html  = "<div class='annunciator annunciator-spare'>\n"
+    html += "&nbsp;"
+    html += "</div>\n"
+  end
+
+  def gpa_to_color(e)
     color = case e.student.gpa
     when 3.5..4.0 ; 'blue'
     when 2.5..3.5 ; 'green'
@@ -152,24 +201,7 @@ module SeatmapHelper
     if (e.student.gpa == 0 && e.student.cohort == 2023)
       color = 'purple'
     end
-    gpa_tag = "background-color: #{color}"
-    html  = "<div class=\'#{klass}\' style=\'#{gpa_tag}\'>\n"
-    html += "&nbsp;"
-    html += "</div>\n"
-  end
-
-  def annunciator_cohort(e)
-    # TODO: sanity check on calculations.
-    year = Date.current.year
-    html  = "<div class='annunciator annunciator-cohort'>\n"
-    html += "<div>#{e.student.cohort - year}</div>"
-    html += "</div>\n"
-  end
-
-  def annunciator_spare
-    html  = "<div class='annunciator annunciator-spare'>\n"
-    html += "&nbsp;"
-    html += "</div>\n"
+    color
   end
 
   def empty_seat
