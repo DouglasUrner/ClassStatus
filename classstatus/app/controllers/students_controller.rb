@@ -50,13 +50,19 @@ class StudentsController < ApplicationController
         count += 1
       end
 
-      # Enroll new students in section
+      # Enroll new students in section.
+      #
+      # XXX: We could be importing a student who has switched sections. The code
+      #      below will result in a duplicate enrollment. I think the fix is to
+      #      add a Course field to the enrollment (or to see if there is a way
+      #      to search for an enrollment in the course though any section) and
+      #      do an enrollment change (update joined_section) instead.
       if (params[:section] != '')
         if (!Enrollment.exists?(student_id: @student, section_id: params[:section]))
           @enrollment = Enrollment.new()
           @enrollment.student_id = @student.id
           @enrollment.section_id = params[:section]
-          @enrollment.state = Enrollment.states[:active]
+          @enrollment.joined_course = Date.current
           @enrollment.save!
           enrolled += 1
         end

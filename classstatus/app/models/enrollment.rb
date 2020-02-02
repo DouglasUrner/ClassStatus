@@ -2,5 +2,9 @@ class Enrollment < ApplicationRecord
   belongs_to :student
   belongs_to :section
 
-  enum state: { active: 'active', dropped: 'dropped' }
+  # TODO: validations on joined and dropped dates.
+
+  def state
+    self.dropped_course ? 'Dropped' : 'Active'
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_192112) do
+ActiveRecord::Schema.define(version: 2020_02_02_200403) do
 
   create_table "blocks", force: :cascade do |t|
     t.string "name"
@@ -29,12 +29,11 @@ ActiveRecord::Schema.define(version: 2020_02_02_192112) do
   create_table "enrollments", force: :cascade do |t|
     t.integer "student_id"
     t.integer "section_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "state"
     t.date "joined_course"
     t.date "joined_section"
     t.date "dropped_course"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_enrollments_on_section_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
