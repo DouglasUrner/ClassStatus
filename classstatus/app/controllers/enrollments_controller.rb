@@ -4,7 +4,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments
   # GET /enrollments.json
   def index
-    @enrollments = Enrollment.all
+    @enrollments = Enrollment
+      .includes(section: :block).includes(:student)
+      .order('blocks.sort_order').order('students.family_name')
   end
 
   # GET /enrollments/1
@@ -69,6 +71,6 @@ class EnrollmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def enrollment_params
-      params.require(:enrollment).permit(:student, :section, :status)
+      params.require(:enrollment).permit(:student_id, :section_id, :state)
     end
 end
