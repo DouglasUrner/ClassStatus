@@ -170,20 +170,20 @@ module SeatmapHelper
   def annunciator_attendance(e)
     klass = "class='annunciator annunciator-attendance'"
 
-    color = 'pink'
-    color = case e.student.all_absences
-    when    0 ; 'blue'
-    when 0..2 ; 'green'
-    when 2..4 ; 'yellow'
-    when 4..6 ; 'orange'
-    when 6..  ; 'red'
+    color = case e.student.overall_absence_rate(e.section_id)
+    when       0.00 ; 'blue'
+    when 0.00..0.02 ; 'green'
+    when 0.02..0.06 ; 'yellow'
+    when 0.06..0.10 ; 'orange'
+    when 0.10..     ; 'red'
+    when         -1 ; 'gray'     # No attendance records
     end
     style = "style=\'background-color: #{color}\'"
 
-    tooltip = "data-toggle='tooltip' title=\'#{e.student.attendance_stats}\'"
+    tooltip = "data-toggle='tooltip' title=\'#{e.student.attendance_stats(e.section_id)}\'"
 
     html  = "<div #{klass} #{style} #{tooltip}>\n"
-    html += "<div>#{e.student.recent_absences(5)}</div>"
+    html += "<div>#{e.student.recent_absences(e.section_id, 5)}</div>"
     html += "</div>\n"
   end
 

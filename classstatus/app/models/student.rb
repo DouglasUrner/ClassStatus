@@ -38,16 +38,27 @@ class Student < ApplicationRecord
   end
 
   # Number of absences and tardies during the life of this section.
-  def attendance_stats
-    "Absent: 0; Tardy: 0"
+  def attendance_stats(s)
+    days   = AttendanceRecord.where(student_id: id, section_id: s)
+    absent = days.where(state: AttendanceRecord.states[:absent])
+    tardy  = days.where(state: AttendanceRecord.states[:tardy])
+
+    "Days: #{days.count}; Absent: #{absent.count}; Tardy: #{tardy.count}"
   end
 
-  def all_absences
-    2
+  def overall_absence_rate(s)
+    days = AttendanceRecord.where(student_id: id, section_id: s)
+    absent = days.where(state: AttendanceRecord.states[:absent])
+    if (days.count > 0)
+      absent.count / days.count
+    else
+      -1
+    end
   end
 
   # Number of absences in the last n classes.
-  def recent_absences(n)
-    1
+  def recent_absences(s, n)
+    days = AttendanceRecord.where(student_id: id, section_id: s)
+    days.where(state: AttendanceRecord.states[:absent]).count
   end
 end
