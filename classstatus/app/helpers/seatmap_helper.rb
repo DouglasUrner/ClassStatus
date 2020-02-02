@@ -4,11 +4,7 @@ module SeatmapHelper
 
     html = "<div class='area unseated'>\n"
     @enrollments.each do |e|
-      if (action_name == 'attendance')
-        html += student_item_varient(e)
-      else
-        html += student_item(e)
-      end
+      html += student_item(e)
     end
     (total_seats - @enrollments.length).times do
       html += empty_seat
@@ -49,15 +45,15 @@ module SeatmapHelper
     html.html_safe
   end
 
-  def seatmap_variant(rows, cols, row_lengths)
-    html = "<div class='seatmap name-only' style='width: 100%'>\n"
-    rows.times do |r|
-      html += seatmap_row(r, cols, row_lengths[r])
-    end
-    html += "</div>\n"
-
-    html.html_safe
-  end
+  # def seatmap_variant(rows, cols, row_lengths)
+  #   html = "<div class='seatmap name-only' style='width: 100%'>\n"
+  #   rows.times do |r|
+  #     html += seatmap_row(r, cols, row_lengths[r])
+  #   end
+  #   html += "</div>\n"
+  #
+  #   html.html_safe
+  # end
 
   def seatmap_row(row, cols, len)
     html = "<div class='seatmap-row'>\n"
@@ -90,13 +86,13 @@ module SeatmapHelper
     html += "</div>\n"
   end
 
-  def student_item_varient(e)
-    html  = "<div class='student-item' data-student-id='#{e.student_id}'>\n"
-    html += "<div class='student-content' data-student-id='#{e.student_id}'>\n"
-    html += student_tile_varient(e)
-    html += "</div>\n"
-    html += "</div>\n"
-  end
+  # def student_item_varient(e)
+  #   html  = "<div class='student-item' data-student-id='#{e.student_id}'>\n"
+  #   html += "<div class='student-content' data-student-id='#{e.student_id}'>\n"
+  #   html += student_tile_varient(e)
+  #   html += "</div>\n"
+  #   html += "</div>\n"
+  # end
 
   ###
   # Generate a student tile
@@ -109,25 +105,32 @@ module SeatmapHelper
     html += "</div>\n"
 
     html += "<div class='student-progress'>\n"
-    html += annunciator_bar(e)
+    case action_name
+    when 'attendance'
+      # Nothing for now.
+    when 'progress'
+      html += annunciator_bar(e)
+    when 'seating'
+      html += annunciator_bar(e)
+    end
     html += "</div>\n"
 
     html += "</div>\n"
   end
 
-  def student_tile_varient(e)
-    html  = "<div class='student-tile'>\n"
-
-    html += "<div class='student-identity'>\n"
-    html += "#{e.student.display_name}\n"
-    html += "</div>\n"
-
-    html += "<div class='student-progress'>\n"
-    # html += annunciator_bar(e)
-    html += "</div>\n"
-
-    html += "</div>\n"
-  end
+  # def student_tile_varient(e)
+  #   html  = "<div class='student-tile'>\n"
+  #
+  #   html += "<div class='student-identity'>\n"
+  #   html += "#{e.student.display_name}\n"
+  #   html += "</div>\n"
+  #
+  #   html += "<div class='student-progress'>\n"
+  #   # html += annunciator_bar(e)
+  #   html += "</div>\n"
+  #
+  #   html += "</div>\n"
+  # end
 
   def annunciator_bar(e)
     html  = "<div class='annunciator-bar'>\n"

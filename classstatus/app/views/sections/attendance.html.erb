@@ -1,9 +1,9 @@
 <div class="seating-chart" id="seating-chart" data-section-id="<%= params[:id] %>">
-  <div class="seating-chart-sidebar section-progress" style="display: none">
+  <div class="seating-chart-sidebar section-attendance" style="display: none">
     <%= seating_chart_buttons %>
     <%= unseated %>
   </div>
-  <%= seatmap_variant(4, 8, [8, 8, 8, 6]) %>
+  <%= seatmap(4, 8, [8, 8, 8, 6]) %>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
