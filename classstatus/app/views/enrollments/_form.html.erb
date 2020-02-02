@@ -6,7 +6,7 @@
   <div class='form-inputs'>
     <%= f.association :student %>
     <%= f.association :section %>
-    <%= f.input :status %>
+    <%= f.input :state, collection: Enrollment.states %>
   </div>
 
   <div class='form-actions'>
