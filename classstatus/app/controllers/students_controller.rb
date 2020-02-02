@@ -56,7 +56,8 @@ class StudentsController < ApplicationController
           @enrollment = Enrollment.new()
           @enrollment.student_id = @student.id
           @enrollment.section_id = params[:section]
-          # TODO: add active flag to Enrollment
+          # TODO: initialize @enrollment.state
+          # @enrollment.state = Enrollment.states[:active]
           @enrollment.save!
           enrolled += 1
         end
