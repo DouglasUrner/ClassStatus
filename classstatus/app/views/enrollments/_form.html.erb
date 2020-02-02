@@ -7,6 +7,9 @@
     <%= f.association :student %>
     <%= f.association :section %>
     <%= f.input :state, collection: Enrollment.states %>
+    <%= f.input :joined_course %>
+    <%= f.input :joined_section, include_blank: true %>
+    <%= f.input :dropped_course, include_blank: true %>
   </div>
 
   <div class='form-actions'>

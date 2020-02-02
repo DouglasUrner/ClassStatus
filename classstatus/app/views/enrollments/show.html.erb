@@ -15,5 +15,20 @@
   <%= @enrollment.state %>
 </p>
 
+<p>
+  <strong>Joined Course:</strong>
+  <%= @enrollment.joined_course %>
+</p>
+
+<p>
+  <strong>Joined Section:</strong>
+  <%= @enrollment.joined_section %>
+</p>
+
+<p>
+  <strong>Dropped Course:</strong>
+  <%= @enrollment.dropped_course %>
+</p>
+
 <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
 <%= link_to 'Back', enrollments_path %>
