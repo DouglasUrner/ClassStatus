@@ -8,7 +8,7 @@
     <%= f.association :section %>
     <%= f.input :attendance_date %>
     <%= f.input :attendance_entered %>
-    <%= f.input :state %>
+    <%= f.input :state, collection: AttendanceRecord.states %>
   </div>
 
   <div class='form-actions'>

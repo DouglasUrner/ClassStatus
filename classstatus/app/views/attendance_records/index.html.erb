@@ -17,8 +17,8 @@
   <tbody>
     <% @attendance_records.each do |attendance_record| %>
       <tr>
-        <td><%= attendance_record.student_id %></td>
-        <td><%= attendance_record.section_id %></td>
+        <td><%= attendance_record.student.name %></td>
+        <td><%= attendance_record.section.name %></td>
         <td><%= attendance_record.attendance_date %></td>
         <td><%= attendance_record.attendance_entered %></td>
         <td><%= attendance_record.state %></td>

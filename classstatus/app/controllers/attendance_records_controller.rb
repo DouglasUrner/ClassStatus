@@ -4,7 +4,8 @@ class AttendanceRecordsController < ApplicationController
   # GET /attendance_records
   # GET /attendance_records.json
   def index
-    @attendance_records = AttendanceRecord.all
+    @attendance_records = AttendanceRecord
+      .includes(:student).order('students.family_name')
   end
 
   # GET /attendance_records/1
