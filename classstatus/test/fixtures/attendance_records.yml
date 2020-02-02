@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  section: one
+  attendance_date: 2020-02-02
+  attendance_entered: 2020-02-02 13:01:35
+  state: MyString
+
+two:
+  student: two
+  section: two
+  attendance_date: 2020-02-02
+  attendance_entered: 2020-02-02 13:01:35
+  state: MyString

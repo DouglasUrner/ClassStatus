@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :attendance_records
   resources :enrollments
   devise_for :users
 
