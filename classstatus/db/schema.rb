@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_200403) do
+ActiveRecord::Schema.define(version: 2020_02_02_210135) do
+
+  create_table "attendance_records", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "section_id", null: false
+    t.date "attendance_date"
+    t.datetime "attendance_entered"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_attendance_records_on_section_id"
+    t.index ["student_id"], name: "index_attendance_records_on_student_id"
+  end
 
   create_table "blocks", force: :cascade do |t|
     t.string "name"
@@ -112,6 +124,8 @@ ActiveRecord::Schema.define(version: 2020_02_02_200403) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "attendance_records", "sections"
+  add_foreign_key "attendance_records", "students"
   add_foreign_key "sections", "blocks"
   add_foreign_key "sections", "courses"
   add_foreign_key "sections", "terms"
