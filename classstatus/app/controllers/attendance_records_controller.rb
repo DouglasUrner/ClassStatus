@@ -40,18 +40,15 @@ class AttendanceRecordsController < ApplicationController
     enrollments.each do |e|
       if (params["ar-#{e.student_id}"])
         state = params["ar-#{e.student_id}"]
-        #ar_params = "{student_id: #{e.student_id}, section_id: #{params['section_id']}, state: \'#{state}\', attendance_date: \'#{Date.current}\', attendance_entered: \'#{DateTime.current}\'}"
-        # puts ar_params
         ar_params = {}
         ar_params[:student_id] = e.student_id
         ar_params[:section_id] = params['section_id']
         ar_params[:state] = state
-        ar_params[:attendance_date] = '1953'
-        ar_params[:attendance_entered] = DateTime.current
+        ar_params[:attendance_date] = Date.today
+        ar_params[:attendance_entered] = DateTime.now
         puts ar_params
-    end
-      a = 0
-      1/a
+        AttendanceRecord.create(ar_params)
+      end
     end
   end
 
