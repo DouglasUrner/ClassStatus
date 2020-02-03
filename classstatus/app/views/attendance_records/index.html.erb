@@ -1,6 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Attendance Records</h1>
+
+<%= link_to 'New Attendance Record', new_attendance_record_path %>
+
+<br><br>
 
 <table>
   <thead>
@@ -29,7 +31,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Attendance Record', new_attendance_record_path %>
