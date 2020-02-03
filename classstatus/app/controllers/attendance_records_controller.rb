@@ -25,16 +25,33 @@ class AttendanceRecordsController < ApplicationController
   # POST /attendance_records
   # POST /attendance_records.json
   def create
-    @attendance_record = AttendanceRecord.new(attendance_record_params)
-
-    respond_to do |format|
-      if @attendance_record.save
-        format.html { redirect_to @attendance_record, notice: 'Attendance record was successfully created.' }
-        format.json { render :show, status: :created, location: @attendance_record }
-      else
-        format.html { render :new }
-        format.json { render json: @attendance_record.errors, status: :unprocessable_entity }
-      end
+    # @attendance_record = AttendanceRecord.new(attendance_record_params)
+    #
+    # respond_to do |format|
+    #   if @attendance_record.save
+    #     format.html { redirect_to @attendance_record, notice: 'Attendance record was successfully created.' }
+    #     format.json { render :show, status: :created, location: @attendance_record }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @attendance_record.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    enrollments = Enrollment.where(section_id: params[:section_id])
+    enrollments.each do |e|
+      if (params["ar-#{e.student_id}"])
+        state = params["ar-#{e.student_id}"]
+        #ar_params = "{student_id: #{e.student_id}, section_id: #{params['section_id']}, state: \'#{state}\', attendance_date: \'#{Date.current}\', attendance_entered: \'#{DateTime.current}\'}"
+        # puts ar_params
+        ar_params = {}
+        ar_params[:student_id] = e.student_id
+        ar_params[:section_id] = params['section_id']
+        ar_params[:state] = state
+        ar_params[:attendance_date] = '1953'
+        ar_params[:attendance_entered] = DateTime.current
+        puts ar_params
+    end
+      a = 0
+      1/a
     end
   end
 

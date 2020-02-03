@@ -76,6 +76,11 @@
   justify-content: space-around;
   flex-direction: column;
 }
+.seatmap-attendance {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
 .seatmap-row {
   width: 100%;
   height: calc(25% - 1%);

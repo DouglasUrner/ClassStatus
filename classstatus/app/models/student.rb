@@ -1,6 +1,8 @@
 class Student < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   has_many :sections, through: :enrollments
+  has_many :attendance_records
+  accepts_nested_attributes_for :attendance_records
 
   validates :given_name,  presence: true
   validates :family_name, presence: true

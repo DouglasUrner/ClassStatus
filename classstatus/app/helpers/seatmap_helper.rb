@@ -36,10 +36,19 @@ module SeatmapHelper
   end
 
   def seatmap(rows, cols, row_lengths)
-    html = "<div class='seatmap' style='width: 100%'>\n"
+    html  = ""
+
+    html += "<div class='seatmap' style='width: 100%'>\n"
+    case action_name
+    when 'attendance'
+      html += "<form class='seatmap-attendance' action=\'#{attendance_records_path}\' method='post'>\n"
+      html += "<input type='hidden' name='authenticity_token' value=\'#{form_authenticity_token}\'>\n"
+      html += "<input type='hidden' name='section_id' value=\'#{@enrollments[0].section_id}\'>\n"
+    end
     rows.times do |r|
       html += seatmap_row(r, cols, row_lengths[r])
     end
+    html += "</form>" if (action_name == 'attendance')
     html += "</div>\n"
 
     html.html_safe
@@ -61,7 +70,9 @@ module SeatmapHelper
       html += seat(row, c)
     end
     (cols - len).times do
-      html += not_a_seat
+    #for i in (cols - len - 1)..0 do
+      # XXX: only works if there is at least one empty seat.
+      html += not_a_seat(1)
     end
     html += "</div>\n"
 
@@ -108,6 +119,7 @@ module SeatmapHelper
     case action_name
     when 'attendance'
       # Nothing for now.
+      html += attendance_block(e.student)
     when 'progress'
       html += annunciator_bar(e)
     when 'seating'
@@ -187,7 +199,7 @@ module SeatmapHelper
     else
       'black'
     end
-    
+
     style = "style=\'color: #{color}; background-color: #{background_color}\'"
 
     tooltip = "data-toggle='tooltip' title=\'#{e.student.attendance_stats(e.section_id)}\'"
@@ -225,8 +237,11 @@ module SeatmapHelper
     html += "</div>\n"
   end
 
-  def not_a_seat
-    html =  "<div class='not-a-seat'>\n"
+  def not_a_seat(countdown)
+    html  = "<div class='not-a-seat'>\n"
+    if (action_name == 'attendance' && countdown == 1)
+      html += "<input type='submit' value='Submit'>"
+    end
     html += "</div>\n"
   end
 end
