@@ -134,7 +134,7 @@ class StudentsController < ApplicationController
     def student_params(p = params)
       p.require(:student).permit(
         :guid, :preferred_name, :given_name, :family_name,
-        :dob, :cohort,
-        :gpa, :gpa_updated)
+        :dob, :gender, :pronouns,
+        :cohort, :gpa, :gpa_updated)
     end
 end

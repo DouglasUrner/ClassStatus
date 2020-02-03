@@ -10,6 +10,7 @@
     <%= f.input :given_name %>
     <%= f.input :family_name %>
     <%= f.input :dob, label: 'Birthday' %>
+    <%= f.input :gender, collection: Student.genders.keys %>
     <%= f.input :cohort %>
     <%= f.input :gpa, label: 'GPA' %>
     <%= f.input :gpa_updated, label: 'GPA Updated' %>

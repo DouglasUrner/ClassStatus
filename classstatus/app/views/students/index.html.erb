@@ -22,7 +22,7 @@
         <td><%= student.section_list %></td>
         <td><%= student.dob %></td>
         <td><%= student.cohort %></td>
-        <td><%= '%.2f' % student.gpa %></td>
+        <td><%= '%.2f' % student.gpa if student.gpa %></td>
         <td><%= student.gpa_updated %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>

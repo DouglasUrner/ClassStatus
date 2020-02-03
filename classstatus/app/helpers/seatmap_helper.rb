@@ -125,7 +125,12 @@ module SeatmapHelper
   def annunciator_bar(e)
     html  = "<div class='annunciator-bar'>\n"
     html += annunciator_basic(e)
-    html += annunciator_spare
+    case action_name
+    when 'seating'
+      html += annunciator_gender(e)
+    else
+      html += annunciator_spare
+    end
     html += annunciator_spare
     html += annunciator_attendance(e)
     html += "</div>\n"
@@ -143,6 +148,25 @@ module SeatmapHelper
   def annunciator_cohort(e)
     html  = "<div class='annunciator annunciator-cohort'>\n"
     html += "<div>#{e.student.cohort.to_s[3]}</div>"
+    html += "</div>\n"
+  end
+
+  def annunciator_gender(e)
+    klass = "class='annunciator annunciator-gender'"
+
+    background_color = case e.student.get_gender
+    when 'F' ; '#ffb3ff'
+    when 'X' ; '#cc66ff'
+    when 'M' ; '#b3ccff'
+    else     ; '#d9d9d9' # Not specified.
+    end
+
+    style = "style=\'background-color: #{background_color}\'"
+
+    tooltip = "data-toggle='tooltip' title=\'#{e.student.get_pronouns}\'"
+
+    html  = "<div #{klass} #{style} #{tooltip}>\n"
+    html += "<div>&nbsp;</div>\n"
     html += "</div>\n"
   end
 

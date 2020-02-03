@@ -7,6 +7,8 @@ class Student < ApplicationRecord
   validates :given_name,  presence: true
   validates :family_name, presence: true
 
+  enum gender: { female: 'F', non_binary: 'X', male: 'M' }
+
   def name
     display_name
   end
@@ -31,6 +33,29 @@ class Student < ApplicationRecord
     "#{preferred_name.blank? ? given_name : preferred_name}"
   end
 
+  def get_gender
+    case gender
+    when 'female'     ; 'F'
+    when 'non_binary' ; 'X'
+    when 'male'       ; 'M'
+    else              ; 'U'
+    end
+  end
+
+  def get_pronouns
+    if pronouns == nil || pronouns == ""
+      case get_gender
+      when 'F' ; 'she/her (inferred)'
+      when 'X' ; 'they/them (inferred)'
+      when 'M' ; 'he/him (inferred)'
+      when 'U' ; 'unset and unable to infer'
+      else     ; puts "PANIC: #{__FILE__}: #{__LINE__}: unknown gender \'#{get_gender}\' for \'#{name}\' (id: #{id})"
+      end
+    else
+      pronouns
+    end
+  end
+
   def section_list
     list = ""
     self.sections.each do |s|
@@ -41,12 +66,14 @@ class Student < ApplicationRecord
 
   # Number of absences and tardies during the life of this section.
   def attendance_stats(s)
-    days   = AttendanceRecord.where(student_id: id, section_id: s)
-    absent = days.where(state: AttendanceRecord.states[:absent])
-    tardy  = days.where(state: AttendanceRecord.states[:tardy])
-    tardy10  = days.where(state: AttendanceRecord.states[:tardy10])
+    all      = AttendanceRecord.where(student_id: id, section_id: s)
 
-    "Days: #{days.count}; Absent: #{absent.count + tardy10.count}/#{tardy10.count}; Tardy: #{tardy.count}"
+    days     = all.count
+    absent   = all.where(state: AttendanceRecord.states[:absent]).count
+    tardy    = all.where(state: AttendanceRecord.states[:tardy]).count
+    tardy10  = all.where(state: AttendanceRecord.states[:tardy10]).count
+
+    "Days: #{days}; Absent: #{absent + tardy10}/#{days}; Tardy: #{tardy}"
   end
 
   def overall_absence_rate(s)

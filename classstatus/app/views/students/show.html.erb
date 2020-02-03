@@ -26,13 +26,18 @@
 </p>
 
 <p>
+  <strong>Gender:</strong>
+  <%= @student.gender %> (<%= @student.pronouns %>)
+</p>
+
+<p>
   <strong>Cohort:</strong>
   <%= @student.cohort %>
 </p>
 
 <p>
   <strong>GPA:</strong>
-  <%= @student.gpa %>
+  <%= '%.2f' % @student.gpa if @student.gpa %>
 </p>
 
 <p>
