@@ -22,6 +22,13 @@ class AttendanceRecordsController < ApplicationController
   def edit
   end
 
+  # POST /section/1/attendance ?
+  def submit_section_attendance
+    # construct params
+    # create @attendance_record
+    # call @attendance_record.save
+  end
+
   # POST /attendance_records
   # POST /attendance_records.json
   def create
