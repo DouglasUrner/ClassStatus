@@ -179,6 +179,9 @@
         unseated.sort('name');
         return areas;
       },
+      dragStartPredicate: function() {
+        return false;
+      }
     })
     .on('dragStart', function(item) {
       item.getElement().style.width = item.getWidth() + 'px';
