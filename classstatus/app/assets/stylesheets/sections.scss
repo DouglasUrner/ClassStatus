@@ -98,6 +98,12 @@
   margin: 4px 4px 4px 4px;
   flex: 1;
 }
+.seatmap-submit-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: center;
+}
 .student-item {
   display: block;
 }

@@ -54,25 +54,25 @@ module SeatmapHelper
     html.html_safe
   end
 
-  # def seatmap_variant(rows, cols, row_lengths)
-  #   html = "<div class='seatmap name-only' style='width: 100%'>\n"
-  #   rows.times do |r|
-  #     html += seatmap_row(r, cols, row_lengths[r])
-  #   end
-  #   html += "</div>\n"
-  #
-  #   html.html_safe
-  # end
-
   def seatmap_row(row, cols, len)
     html = "<div class='seatmap-row'>\n"
     len.times do |c|
       html += seat(row, c)
     end
-    (cols - len).times do
-    #for i in (cols - len - 1)..0 do
-      # XXX: only works if there is at least one empty seat.
-      html += not_a_seat(1)
+    if (cols - len > 0)
+      case action_name
+      when 'attendance'
+        (cols - len - 1).times do
+          # XXX: only works if there is at least one empty seat.
+          html += not_a_seat
+        end
+        html += seatmap_submit_button
+      else
+        (cols - len).times do
+          # XXX: only works if there is at least one empty seat.
+          html += not_a_seat
+        end
+      end
     end
     html += "</div>\n"
 
@@ -96,14 +96,6 @@ module SeatmapHelper
     html += "</div>\n"
     html += "</div>\n"
   end
-
-  # def student_item_varient(e)
-  #   html  = "<div class='student-item' data-student-id='#{e.student_id}'>\n"
-  #   html += "<div class='student-content' data-student-id='#{e.student_id}'>\n"
-  #   html += student_tile_varient(e)
-  #   html += "</div>\n"
-  #   html += "</div>\n"
-  # end
 
   ###
   # Generate a student tile
@@ -129,20 +121,6 @@ module SeatmapHelper
 
     html += "</div>\n"
   end
-
-  # def student_tile_varient(e)
-  #   html  = "<div class='student-tile'>\n"
-  #
-  #   html += "<div class='student-identity'>\n"
-  #   html += "#{e.student.display_name}\n"
-  #   html += "</div>\n"
-  #
-  #   html += "<div class='student-progress'>\n"
-  #   # html += annunciator_bar(e)
-  #   html += "</div>\n"
-  #
-  #   html += "</div>\n"
-  # end
 
   def annunciator_bar(e)
     html  = "<div class='annunciator-bar'>\n"
@@ -237,11 +215,14 @@ module SeatmapHelper
     html += "</div>\n"
   end
 
-  def not_a_seat(countdown)
+  def not_a_seat
     html  = "<div class='not-a-seat'>\n"
-    if (action_name == 'attendance' && countdown == 1)
-      html += "<input type='submit' value='Submit'>"
-    end
+    html += "</div>\n"
+  end
+
+  def seatmap_submit_button
+    html  = "<div class='not-a-seat seatmap-submit-button'>\n"
+    html += "<button type='submit' class='btn btn-primary'>Submit</button>"
     html += "</div>\n"
   end
 end
