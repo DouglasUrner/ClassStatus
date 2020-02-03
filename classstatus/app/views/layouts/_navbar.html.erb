@@ -6,7 +6,10 @@
                 <button class="btn btn-default dropdown-toggle" type="button"
           id='section-progress-picker' data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="true">
-            <% if controller_name == 'sections' %>
+            <% if controller_name == 'sections' &&
+              ( action_name == 'attendance' || action_name == 'progress' ||
+                action_name == 'seating' )
+            %>
               <span id='navbar-current-section'><%= Section.find(params[:id]).short_name %></span>
               <span class="caret"></span>
             <% else %>
@@ -31,7 +34,10 @@
 
       <ul class="navbar-nav mr-auto">
 
-        <% if controller_name == 'sections' %>
+        <% if controller_name == 'sections' &&
+          ( action_name == 'attendance' || action_name == 'progress' ||
+            action_name == 'seating' )
+        %>
 
           <li class="nav-item active">
             <%= link_to 'Progress', progress_section_path(params[:id]), class: 'nav-link' %>
