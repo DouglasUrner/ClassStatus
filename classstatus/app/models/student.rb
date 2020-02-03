@@ -9,6 +9,29 @@ class Student < ApplicationRecord
 
   enum gender: { female: 'F', non_binary: 'X', male: 'M' }
 
+  def compare(old, new)
+    false
+  end
+
+  # Take the attributes in new and merge (update) them into old. Don't change
+  # the values of guid and id (id should be unset and a guid mismatch would be
+  # a fatal error. Return a copy of old with updates from new.
+  def merge_attributes(new)
+    merge = Student.new(attributes).attributes
+    new.stringify_keys.each do |key, value|
+      case key
+      when 'guid' ; puts 'guid: skipped'
+      when 'id'   ; puts 'id: skipped'
+      when 'gpa'
+        merge[key] = value
+        merge['gpa_updated'] = DateTime.current
+      else
+        merge[key] = value if merge.key?(key)
+      end
+    end
+    merge
+  end
+
   def name
     display_name
   end
@@ -89,6 +112,7 @@ class Student < ApplicationRecord
 
   # Number of absences in the last n classes.
   def recent_absences(s, n)
+    # TODO: limit number of records returned to n.
     days = AttendanceRecord.where(student_id: id, section_id: s)
     days.where(state: AttendanceRecord.states[:absent]).count +
       days.where(state: AttendanceRecord.states[:tardy10]).count
