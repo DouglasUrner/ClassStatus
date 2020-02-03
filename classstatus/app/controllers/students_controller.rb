@@ -41,6 +41,8 @@ class StudentsController < ApplicationController
         # TODO: some of the student information may have changed - especially
         #       their GPA - so we need to do something about checking and
         #       updating the record.
+        updated_attributes = @student.merge_attributes(p['student'])
+        @student.update(updated_attributes)
       else
         @student = Student.new(student_params(p))
         if (@student.gpa == nil)
