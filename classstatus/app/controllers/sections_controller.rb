@@ -20,7 +20,6 @@ class SectionsController < ApplicationController
   # GET /sections/1
   # GET /sections/1.json
   def show
-    #@enrollments = Enrollment.where(section_id: @section)
   end
 
   # GET /sections/new
@@ -104,11 +103,15 @@ class SectionsController < ApplicationController
 
     # Must be called after set_section
     # TODO: handle error when params[:id] is not set, call set_section?
+    # TODO: maybe return a hash of active and dropped students?
     def set_enrollments
       @enrollments = Enrollment.where(section_id: params[:id])
+        .includes(:student).order('students.family_name')
+      @active = @enrollments.where(dropped_course: nil)
+      @dropped = @enrollments.where.not(dropped_course: nil)
     end
 
-    # Check that students have been imported.
+    # Check that we have some students.
     def check_for_students
       # TODO: set a message.
       # TODO: handle on a per section basis?
