@@ -81,7 +81,11 @@ class SectionsController < ApplicationController
   def seating
   end
 
+  # POST /sections/1/attendance
   def attendance
+    # Start here, then:
+    # - normalize the attendance records
+    # - redirect to attendance_records#create
   end
 
   def progress
