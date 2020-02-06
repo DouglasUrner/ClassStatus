@@ -60,16 +60,18 @@
             Configure
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Units</a>
-            <a class="dropdown-item" href="#">Assignments</a>
-            <%= link_to 'Students',  students_path,   class: 'dropdown-item' %>
-            <div class="dropdown-divider"></div>
-            <%= link_to 'Courses',   courses_path,    class: 'dropdown-item' %>
+            <%#= link_to 'Assignments', assignments_path, class: 'dropdown-item' %>
+            <%= link_to 'Attendance Records', attendance_records_path, class: 'dropdown-item' %>
+            <%= link_to 'Enrollment Records', enrollments_path, class: 'dropdown-item' %>
             <%= link_to 'Sections',  sections_path,   class: 'dropdown-item' %>
+            <%= link_to 'Students',  students_path,   class: 'dropdown-item' %>
+            <%#= link_to 'Units', units_path, class: 'dropdown-item' %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Blocks',    blocks_path,     class: 'dropdown-item' %>
+            <%= link_to 'Courses',   courses_path,    class: 'dropdown-item' %>
             <%= link_to 'Terms',     terms_path,      class: 'dropdown-item' %>
             <%= link_to 'TermNames', term_names_path, class: 'dropdown-item' %>
             <%= link_to 'Years',     years_path,      class: 'dropdown-item' %>
-            <%= link_to 'Blocks',    blocks_path,     class: 'dropdown-item' %>
           </div>
         </li>
 
