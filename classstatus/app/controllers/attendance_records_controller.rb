@@ -43,6 +43,14 @@ class AttendanceRecordsController < ApplicationController
     #     format.json { render json: @attendance_record.errors, status: :unprocessable_entity }
     #   end
     # end
+
+    # This code is meant to be called when attendance is posted for a whole
+    # section, from the section attendance view - it should be a separate method
+    # from the code above which is the 'real' attendance_record#create method.
+    #
+    # This code should prepare the submission from the view and pass each record
+    # off to attendance_record#create. That means the parameter checking can be
+    # done, and that creating individual records will work.
     enrollments = Enrollment.where(section_id: params[:section_id])
     enrollments.each do |e|
       if (params["ar-#{e.student_id}"])
@@ -57,6 +65,11 @@ class AttendanceRecordsController < ApplicationController
         AttendanceRecord.create(ar_params)
       end
     end
+  end
+
+  # Handle submissions from the section attendance view (should it be in
+  # sections_controller)
+  def post_bulk_attendance
   end
 
   # PATCH/PUT /attendance_records/1
