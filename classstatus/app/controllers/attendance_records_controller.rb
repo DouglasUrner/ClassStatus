@@ -46,14 +46,13 @@ class AttendanceRecordsController < ApplicationController
     enrollments = Enrollment.where(section_id: params[:section_id])
     enrollments.each do |e|
       if (params["ar-#{e.student_id}"])
-        state = params["ar-#{e.student_id}"]
+        primary = params["ar-#{e.student_id}"]
         ar_params = {}
         ar_params[:student_id] = e.student_id
         ar_params[:section_id] = params['section_id']
-        ar_params[:state] = state
+        ar_params[:primary] = primary
+        ar_params[:secondary] = secondary
         ar_params[:attendance_date] = Date.today
-        ar_params[:attendance_entered] = DateTime.now
-        puts ar_params
         AttendanceRecord.create(ar_params)
       end
     end
@@ -64,11 +63,13 @@ class AttendanceRecordsController < ApplicationController
   def update
     respond_to do |format|
       if @attendance_record.update(attendance_record_params)
-        format.html { redirect_to @attendance_record, notice: 'Attendance record was successfully updated.' }
+        format.html { redirect_to @attendance_record,
+          notice: 'Attendance record was successfully updated.' }
         format.json { render :show, status: :ok, location: @attendance_record }
       else
         format.html { render :edit }
-        format.json { render json: @attendance_record.errors, status: :unprocessable_entity }
+        format.json { render json: @attendance_record.errors,
+          status: :unprocessable_entity }
       end
     end
   end
@@ -78,7 +79,8 @@ class AttendanceRecordsController < ApplicationController
   def destroy
     @attendance_record.destroy
     respond_to do |format|
-      format.html { redirect_to attendance_records_url, notice: 'Attendance record was successfully destroyed.' }
+      format.html { redirect_to attendance_records_url,
+        notice: 'Attendance record was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -91,6 +93,7 @@ class AttendanceRecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_record_params
-      params.require(:attendance_record).permit(:student_id, :section_id, :attendance_date, :attendance_entered, :state)
+      params.require(:attendance_record).permit(:student_id, :section_id,
+        :attendance_date, :primary, :secondary )
     end
 end

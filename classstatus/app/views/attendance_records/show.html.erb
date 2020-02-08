@@ -21,8 +21,13 @@
 </p>
 
 <p>
-  <strong>State:</strong>
-  <%= @attendance_record.state %>
+  <strong>Primary:</strong>
+  <%= @attendance_record.primary %>
+</p>
+
+<p>
+  <strong>Secondary:</strong>
+  <%= @attendance_record.secondary %>
 </p>
 
 <%= link_to 'Edit', edit_attendance_record_path(@attendance_record) %> |

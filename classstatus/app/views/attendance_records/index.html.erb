@@ -11,7 +11,8 @@
       <th>Section</th>
       <th>Attendance date</th>
       <th>Attendance entered</th>
-      <th>State</th>
+      <th>Primary</th>
+      <th>Secondary</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,7 +24,8 @@
         <td><%= attendance_record.section.name %></td>
         <td><%= attendance_record.attendance_date %></td>
         <td><%= attendance_record.attendance_entered %></td>
-        <td><%= attendance_record.state %></td>
+        <td><%= attendance_record.primary %></td>
+        <td><%= attendance_record.secondary %></td>
         <td><%= link_to 'Show', attendance_record %></td>
         <td><%= link_to 'Edit', edit_attendance_record_path(attendance_record) %></td>
         <td><%= link_to 'Destroy', attendance_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_172026) do
+ActiveRecord::Schema.define(version: 2020_02_06_235337) do
 
   create_table "attendance_records", force: :cascade do |t|
     t.integer "student_id", null: false
     t.integer "section_id", null: false
     t.date "attendance_date"
-    t.datetime "attendance_entered"
-    t.string "state"
+    t.string "primary"
+    t.string "secondary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_attendance_records_on_section_id"
@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 2020_02_03_172026) do
   create_table "enrollments", force: :cascade do |t|
     t.integer "student_id"
     t.integer "section_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.date "joined_course"
     t.date "joined_section"
     t.date "dropped_course"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_enrollments_on_section_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
@@ -80,13 +80,13 @@ ActiveRecord::Schema.define(version: 2020_02_03_172026) do
     t.string "given_name"
     t.string "family_name"
     t.date "dob"
-    t.string "gender"
-    t.string "pronouns"
     t.integer "cohort"
     t.float "gpa"
     t.datetime "gpa_updated"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "gender"
+    t.string "pronouns"
     t.index ["guid"], name: "index_students_on_guid", unique: true
   end
 

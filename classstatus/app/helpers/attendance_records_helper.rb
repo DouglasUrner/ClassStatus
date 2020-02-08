@@ -1,8 +1,11 @@
 module AttendanceRecordsHelper
 def attendance_block(student, default = 'in_class')
     html  = "<div>\n"
-    AttendanceRecord.states.keys.each do |s|
-      html += "<input type='radio' name=\'ar-#{student.id}\' value=\'#{s}\' #{'checked' if s == default}>\n"
+    AttendanceRecord.primary.keys.each do |p|
+      html += "<input type='radio' name=\'ar_p-#{student.id}\' value=\'#{p}\' #{'checked' if p == default}>\n"
+    end
+    AttendanceRecord.secondary.keys.each do |s|
+      html += "<input type='radio' name=\'ar_s-#{student.id}\' value=\'#{s}\'>\n"
     end
     html += "</div>\n"
     html.html_safe

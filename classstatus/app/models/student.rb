@@ -92,17 +92,17 @@ class Student < ApplicationRecord
     all      = AttendanceRecord.where(student_id: id, section_id: s)
 
     days     = all.count
-    absent   = all.where(state: AttendanceRecord.states[:absent]).count
-    tardy    = all.where(state: AttendanceRecord.states[:tardy]).count
-    tardy10  = all.where(state: AttendanceRecord.states[:tardy10]).count
+    absent   = all.where(primary: AttendanceRecord.absent).count
+    tardy    = all.where(primary: AttendanceRecord.tardy).count
+    tardy10  = all.where(primary: AttendanceRecord.tardy_10).count
 
     "Days: #{days}; Absent: #{absent + tardy10}/#{days}; Tardy: #{tardy}"
   end
 
   def overall_absence_rate(s)
     days = AttendanceRecord.where(student_id: id, section_id: s)
-    absent = days.where(state: AttendanceRecord.states[:absent]) +
-      days.where(state: AttendanceRecord.states[:tardy10])
+    absent = days.where(primary: AttendanceRecord.absent) +
+      days.where(primary: AttendanceRecord.tardy_10)
     if (days.count > 0)
       absent.count / days.count
     else
@@ -114,7 +114,7 @@ class Student < ApplicationRecord
   def recent_absences(s, n)
     # TODO: limit number of records returned to n.
     days = AttendanceRecord.where(student_id: id, section_id: s)
-    days.where(state: AttendanceRecord.states[:absent]).count +
-      days.where(state: AttendanceRecord.states[:tardy10]).count
+    days.where(primary: AttendanceRecord.absent).count +
+      days.where(primary: AttendanceRecord.tardy_10).count
   end
 end
