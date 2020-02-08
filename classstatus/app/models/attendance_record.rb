@@ -11,7 +11,7 @@ class AttendanceRecord < ApplicationRecord
   }
 
   # Secondary attendance states can coexist with the primary states.
-  enum seconday: {
+  enum secondary: {
     called_out: 'called_out',
     tardy_lunch: 'tardy_lunch',
     absent_lunch: 'absent_lunch'
