@@ -20,7 +20,7 @@ class AcademicYearsControllerTest < ActionDispatch::IntegrationTest
       post academic_years_url, params: { academic_year: { name: @academic_year.name } }
     end
 
-    assert_redirected_to academic_year_url(AcademicYear.last)
+    assert_redirected_to academic_years_url
   end
 
   test "should show academic_year" do
@@ -35,7 +35,8 @@ class AcademicYearsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update academic_year" do
     patch academic_year_url(@academic_year), params: { academic_year: { name: @academic_year.name } }
-    assert_redirected_to academic_year_url(@academic_year)
+    assert_redirected_to academic_years_url
+    # Also check notice
   end
 
   test "should destroy academic_year" do
