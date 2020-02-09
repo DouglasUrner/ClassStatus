@@ -1,3 +1,39 @@
 // Place all the styles related to the Courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+//
+
+h1 {
+  display: flex;
+  justify-content: space-between;
+}
+h1 > span > a {
+  padding-right: .1em;
+  text-decoration: none;
+}
+// Table sorting (per http://railscasts.com/episodes/228-sortable-table-columns)
+th > a {
+  color: #DDD;
+  text-decoration: none;
+}
+
+th > a.current {
+  color: #FFF;
+  text-decoration: inherit;
+}
+
+a.current.asc::after {
+  content: "^";
+  //content: "\f0de";
+  font-family: 'FontAwesome 5 Free';
+  padding-left: 10px !important;
+  vertical-align: middle;
+}
+
+a.current.desc::after {
+  content: "\f0de";
+  //content: "v";
+  font-family: 'FontAwesome 5 Free', FontAwesome, sans-serif;
+  padding-left: 10px !important;
+  vertical-align: middle;
+}
