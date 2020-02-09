@@ -17,7 +17,7 @@ class TermsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create term" do
     assert_difference('Term.count') do
-      post terms_url, params: { term: { academic_years_id: @term.academic_years_id, end_date: @term.end_date, start_date: @term.start_date, term_names_id: @term.term_names_id } }
+      post terms_url, params: { term: { academic_year_id: @term.academic_year_id, end_date: @term.end_date, start_date: @term.start_date, term_name_id: @term.term_name_id } }
     end
 
     assert_redirected_to term_url(Term.last)
@@ -34,7 +34,7 @@ class TermsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update term" do
-    patch term_url(@term), params: { term: { academic_years_id: @term.academic_years_id, end_date: @term.end_date, start_date: @term.start_date, term_names_id: @term.term_names_id } }
+    patch term_url(@term), params: { term: { academic_year_id: @term.academic_year_id, end_date: @term.end_date, start_date: @term.start_date, term_name_id: @term.term_name_id } }
     assert_redirected_to term_url(@term)
   end
 

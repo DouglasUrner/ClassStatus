@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_122256) do
+ActiveRecord::Schema.define(version: 2020_02_09_123739) do
 
   create_table "academic_years", force: :cascade do |t|
     t.string "name"
@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(version: 2020_02_09_122256) do
   end
 
   create_table "terms", force: :cascade do |t|
-    t.integer "academic_years_id", null: false
-    t.integer "term_names_id", null: false
+    t.integer "academic_year_id", null: false
+    t.integer "term_name_id", null: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["academic_years_id"], name: "index_terms_on_academic_years_id"
-    t.index ["term_names_id"], name: "index_terms_on_term_names_id"
+    t.index ["academic_year_id"], name: "index_terms_on_academic_year_id"
+    t.index ["term_name_id"], name: "index_terms_on_term_name_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,6 +66,6 @@ ActiveRecord::Schema.define(version: 2020_02_09_122256) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "terms", "academic_years", column: "academic_years_id"
-  add_foreign_key "terms", "term_names", column: "term_names_id"
+  add_foreign_key "terms", "academic_years"
+  add_foreign_key "terms", "term_names"
 end

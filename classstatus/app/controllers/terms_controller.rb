@@ -1,10 +1,12 @@
 class TermsController < ApplicationController
   before_action :set_term, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
+
   # GET /terms
   # GET /terms.json
   def index
-    @terms = Term.all
+    @terms = Term.includes(:term_name).order(sort_column + " " + sort_direction)
   end
 
   # GET /terms/1
@@ -28,7 +30,8 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       if @term.save
-        format.html { redirect_to @term, notice: 'Term was successfully created.' }
+        format.html { redirect_to terms_path,
+          notice: 'Term was successfully created.' }
         format.json { render :show, status: :created, location: @term }
       else
         format.html { render :new }
@@ -42,7 +45,8 @@ class TermsController < ApplicationController
   def update
     respond_to do |format|
       if @term.update(term_params)
-        format.html { redirect_to @term, notice: 'Term was successfully updated.' }
+        format.html { redirect_to terms_path,
+          notice: 'Term was successfully updated.' }
         format.json { render :show, status: :ok, location: @term }
       else
         format.html { render :edit }
@@ -56,7 +60,8 @@ class TermsController < ApplicationController
   def destroy
     @term.destroy
     respond_to do |format|
-      format.html { redirect_to terms_url, notice: 'Term was successfully destroyed.' }
+      format.html { redirect_to terms_url,
+        notice: 'Term was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +72,17 @@ class TermsController < ApplicationController
       @term = Term.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet,
+    # only allow the white list through.
     def term_params
       params.require(:term).permit(:academic_years_id, :term_names_id, :start_date, :end_date)
+    end
+
+    def sort_column
+      Term.column_names.include?(params[:sort]) ? params[:sort] : "term_names.name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

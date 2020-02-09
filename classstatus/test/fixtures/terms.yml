@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  academic_years: one
-  term_names: one
+  academic_year: one
+  term_name: one
   start_date: 2020-02-09
   end_date: 2020-02-09
 
 two:
-  academic_years: two
-  term_names: two
+  academic_year: two
+  term_name: two
   start_date: 2020-02-09
   end_date: 2020-02-09

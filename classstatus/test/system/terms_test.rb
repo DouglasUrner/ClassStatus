@@ -14,10 +14,10 @@ class TermsTest < ApplicationSystemTestCase
     visit terms_url
     click_on "New Term"
 
-    fill_in "Academic years", with: @term.academic_years_id
+    fill_in "Academic year", with: @term.academic_year_id
     fill_in "End date", with: @term.end_date
     fill_in "Start date", with: @term.start_date
-    fill_in "Term names", with: @term.term_names_id
+    fill_in "Term name", with: @term.term_name_id
     click_on "Create Term"
 
     assert_text "Term was successfully created"
@@ -28,10 +28,10 @@ class TermsTest < ApplicationSystemTestCase
     visit terms_url
     click_on "Edit", match: :first
 
-    fill_in "Academic years", with: @term.academic_years_id
+    fill_in "Academic year", with: @term.academic_year_id
     fill_in "End date", with: @term.end_date
     fill_in "Start date", with: @term.start_date
-    fill_in "Term names", with: @term.term_names_id
+    fill_in "Term name", with: @term.term_name_id
     click_on "Update Term"
 
     assert_text "Term was successfully updated"
