@@ -45,8 +45,9 @@ class AttendanceRecordsController < ApplicationController
     # end
     enrollments = Enrollment.where(section_id: params[:section_id])
     enrollments.each do |e|
-      if (params["ar-#{e.student_id}"])
-        primary = params["ar-#{e.student_id}"]
+      if (params["ar_p-#{e.student_id}"])
+        primary = params["ar_p-#{e.student_id}"]
+        secondary = params["ar_s-#{e.student_id}"] ? params["ar_s-#{e.student_id}"] : nil
         ar_params = {}
         ar_params[:student_id] = e.student_id
         ar_params[:section_id] = params['section_id']
