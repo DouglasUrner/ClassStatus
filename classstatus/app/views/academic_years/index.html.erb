@@ -11,7 +11,7 @@
 
   <tbody>
     <% @academic_years.each do |academic_year| %>
-      <tr>
+      <tr scope='row'>
         <td><%= academic_year.name %></td>
         <td><%= link_to 'Show', academic_year %></td>
         <td><%= link_to 'Edit', edit_academic_year_path(academic_year) %></td>
