@@ -29,9 +29,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 ####
-# Local changes here:
+# Local changes below
 
-# Simple Form
+# Simple Form - Bootstrap support is pulled in during installation
+# rails generate simple_form:install --bootstrap
 gem 'simple_form', '~> 5.0', '>= 5.0.1'
 
 # Devise: user authentication
@@ -40,7 +41,7 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 # Ledermann rails-settings: configuration
 gem 'ledermann-rails-settings', '~> 2.5'
 
-# Boilerplate continues below.
+# End of local changes
 ####
 
 group :development, :test do
@@ -55,8 +56,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  # Rails ERD
-  gem 'rails-erd', '~> 1.6' 
 end
 
 group :test do
@@ -65,6 +64,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  # Coverage testing
+  gem 'simplecov', '~> 0.18.1', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

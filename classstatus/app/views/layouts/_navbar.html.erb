@@ -1,27 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class='container'>
 
-    <div class='navbar-brand'>
-      <div class='dropdown'>
-                <button class="btn btn-default dropdown-toggle" type="button"
-          id='section-progress-picker' data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="true">
-            <% if controller_name == 'sections' &&
-              ( action_name == 'attendance' || action_name == 'progress' ||
-                action_name == 'seating' )
-            %>
-              <span id='navbar-current-section'><%= Section.find(params[:id]).short_name %></span>
-              <span class="caret"></span>
-            <% else %>
-              <span id='navbar-current-section'>Select Section</span>
-              <span class="caret"></span>
-            <% end %>
-          </button>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= section_progress_picker %>
-        </div>
-      </div>
-    </div>
+     <%= link_to 'Foundation', root_path, class: 'navbar-brand' %>
 
     <button class="navbar-toggler" type="button"
         data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -34,48 +14,43 @@
 
       <ul class="navbar-nav mr-auto">
 
-        <% if controller_name == 'sections' &&
-          ( action_name == 'attendance' || action_name == 'progress' ||
-            action_name == 'seating' )
-        %>
+        <li class="nav-item active">
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
+          <!-- a class="nav-link" href="#">
+            Home <span class="sr-only">(current)</span>
+          </a -->
+        </li>
 
-          <li class="nav-item active">
-            <%= link_to 'Progress', progress_section_path(params[:id]), class: 'nav-link' %>
-          </li>
-
-          <li class="nav-item">
-            <%= link_to 'Attendance', attendance_section_path(params[:id]), class: 'nav-link' %>
-          </li>
-
-          <li class="nav-item">
-            <%= link_to 'Seating', seating_section_path(params[:id]), class: 'nav-link' %>
-          </li>
-
-        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"
               href="#" id="navbarDropdown" role="button"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Configure
+            Dropdown
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%#= link_to 'Assignments', assignments_path, class: 'dropdown-item' %>
-            <%= link_to 'Attendance Records', attendance_records_path, class: 'dropdown-item' %>
-            <%= link_to 'Enrollment Records', enrollments_path, class: 'dropdown-item' %>
-            <%= link_to 'Sections',  sections_path,   class: 'dropdown-item' %>
-            <%= link_to 'Students',  students_path,   class: 'dropdown-item' %>
-            <%#= link_to 'Units', units_path, class: 'dropdown-item' %>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
-            <%= link_to 'Blocks',    blocks_path,     class: 'dropdown-item' %>
-            <%= link_to 'Courses',   courses_path,    class: 'dropdown-item' %>
-            <%= link_to 'Terms',     terms_path,      class: 'dropdown-item' %>
-            <%= link_to 'TermNames', term_names_path, class: 'dropdown-item' %>
-            <%= link_to 'Years',     years_path,      class: 'dropdown-item' %>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+
       </ul>
+
+      <!-- form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search"
+          aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search</button>
+      </form -->
 
       <ul class='nav navbar-nav navbar-right'>
         <% if user_signed_in? %>
@@ -86,10 +61,11 @@
         <% else %>
           <li class='nav-item'>
             <%= link_to 'Login', new_user_session_path, class: 'nav-link' %></li>
+          <li class='nav-item'>
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
 
     </div>
   </div>
-
 </nav>
