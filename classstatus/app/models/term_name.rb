@@ -1,0 +1,2 @@
+class TermName < ApplicationRecord
+end
