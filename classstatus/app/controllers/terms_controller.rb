@@ -6,7 +6,8 @@ class TermsController < ApplicationController
   # GET /terms
   # GET /terms.json
   def index
-    @terms = Term.includes(:term_name).order(sort_column + " " + sort_direction)
+    # TODO: .order on start_date
+    @terms = Term.order(sort_column + " " + sort_direction)
   end
 
   # GET /terms/1
@@ -75,11 +76,11 @@ class TermsController < ApplicationController
     # Never trust parameters from the scary internet,
     # only allow the white list through.
     def term_params
-      params.require(:term).permit(:academic_years_id, :term_names_id, :start_date, :end_date)
+      params.require(:term).permit(:academic_year_id, :term_name_id, :start_date, :end_date)
     end
 
     def sort_column
-      Term.column_names.include?(params[:sort]) ? params[:sort] : "term_names.name"
+      Term.column_names.include?(params[:sort]) ? params[:sort] : "start_date"
     end
 
     def sort_direction
