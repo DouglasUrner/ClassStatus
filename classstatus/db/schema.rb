@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_104837) do
+ActiveRecord::Schema.define(version: 2020_02_09_120100) do
 
   create_table "academic_years", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 2020_02_09_104837) do
     t.datetime "updated_at"
     t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
     t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
+  end
+
+  create_table "term_names", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
