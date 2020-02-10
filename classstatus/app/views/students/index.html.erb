@@ -1,0 +1,41 @@
+<h1><span>Students</span>
+  <span><%= link_to '+', new_student_path %></span></h1>
+
+<table class='table table-sm table-striped'>
+  <thead class='thead-dark'>
+    <tr>
+      <th scope='row'>Guid</th>
+      <th scope='row'>Preferred name</th>
+      <th scope='row'>Given name</th>
+      <th scope='row'>Family name</th>
+      <th scope='row'>Pronouns</th>
+      <th scope='row'>Gender</th>
+      <th scope='row'>Dob</th>
+      <th scope='row'>Cohort</th>
+      <th scope='row'>Gpa</th>
+      <th scope='row'>Gpa updated</th>
+      <th scope='row' colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.guid %></td>
+        <td><%= student.preferred_name %></td>
+        <td><%= student.given_name %></td>
+        <td><%= student.family_name %></td>
+        <td><%= student.pronouns %></td>
+        <td><%= student.gender %></td>
+        <td><%= student.dob %></td>
+        <td><%= student.cohort %></td>
+        <td><%= student.gpa %></td>
+        <td><%= student.gpa_updated %></td>
+        <td><%= link_to 'Show', student %></td>
+        <td><%= link_to 'Edit', edit_student_path(student) %></td>
+        <td><%= link_to 'Destroy', student,
+          method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

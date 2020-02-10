@@ -1,0 +1,52 @@
+<p>
+  <strong>Guid:</strong>
+  <%= @student.guid %>
+</p>
+
+<p>
+  <strong>Preferred name:</strong>
+  <%= @student.preferred_name %>
+</p>
+
+<p>
+  <strong>Given name:</strong>
+  <%= @student.given_name %>
+</p>
+
+<p>
+  <strong>Family name:</strong>
+  <%= @student.family_name %>
+</p>
+
+<p>
+  <strong>Pronouns:</strong>
+  <%= @student.pronouns %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @student.gender %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @student.dob %>
+</p>
+
+<p>
+  <strong>Cohort:</strong>
+  <%= @student.cohort %>
+</p>
+
+<p>
+  <strong>Gpa:</strong>
+  <%= @student.gpa %>
+</p>
+
+<p>
+  <strong>Gpa updated:</strong>
+  <%= @student.gpa_updated %>
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
