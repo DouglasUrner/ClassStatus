@@ -26,7 +26,7 @@ class BlocksController < ApplicationController
     @block = Block.new(block_params)
 
     if @block.save
-      redirect_to @block,
+      redirect_to blocks_path,
         notice: 'Block was successfully created.'
     else
       render :new
@@ -36,8 +36,8 @@ class BlocksController < ApplicationController
   # PATCH/PUT /blocks/1
   def update
     if @block.update(block_params)
-      redirect_to @block,
-        notice: 'Block was successfully updated.'
+      redirect_to blocks_path,
+        notice: "Block #{@block.name} was successfully updated."
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class BlocksController < ApplicationController
   def destroy
     @block.destroy
     redirect_to blocks_url,
-      notice: 'Block was successfully destroyed.'
+      notice: "Block #{@block.name} was successfully destroyed."
   end
 
   private
