@@ -20,7 +20,7 @@ class TermNamesControllerTest < ActionDispatch::IntegrationTest
       post term_names_url, params: { term_name: { name: @term_name.name, short_name: @term_name.short_name } }
     end
 
-    assert_redirected_to term_name_url(TermName.last)
+    assert_redirected_to term_names_url
   end
 
   test "should show term_name" do
@@ -35,7 +35,7 @@ class TermNamesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update term_name" do
     patch term_name_url(@term_name), params: { term_name: { name: @term_name.name, short_name: @term_name.short_name } }
-    assert_redirected_to term_name_url(@term_name)
+    assert_redirected_to term_names_url
   end
 
   test "should destroy term_name" do

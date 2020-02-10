@@ -20,7 +20,7 @@ class BlocksControllerTest < ActionDispatch::IntegrationTest
       post blocks_url, params: { block: { name: @block.name, sort_order: @block.sort_order } }
     end
 
-    assert_redirected_to block_url(Block.last)
+    assert_redirected_to blocks_url
   end
 
   test "should show block" do
@@ -35,7 +35,7 @@ class BlocksControllerTest < ActionDispatch::IntegrationTest
 
   test "should update block" do
     patch block_url(@block), params: { block: { name: @block.name, sort_order: @block.sort_order } }
-    assert_redirected_to block_url(@block)
+    assert_redirected_to blocks_url
   end
 
   test "should destroy block" do

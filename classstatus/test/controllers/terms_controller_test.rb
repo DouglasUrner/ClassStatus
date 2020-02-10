@@ -20,7 +20,7 @@ class TermsControllerTest < ActionDispatch::IntegrationTest
       post terms_url, params: { term: { academic_year_id: @term.academic_year_id, end_date: @term.end_date, start_date: @term.start_date, term_name_id: @term.term_name_id } }
     end
 
-    assert_redirected_to term_url(Term.last)
+    assert_redirected_to terms_url
   end
 
   test "should show term" do
@@ -35,7 +35,7 @@ class TermsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update term" do
     patch term_url(@term), params: { term: { academic_year_id: @term.academic_year_id, end_date: @term.end_date, start_date: @term.start_date, term_name_id: @term.term_name_id } }
-    assert_redirected_to term_url(@term)
+    assert_redirected_to terms_url
   end
 
   test "should destroy term" do
