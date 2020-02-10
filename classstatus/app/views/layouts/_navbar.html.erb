@@ -29,8 +29,8 @@
             Dropdown
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <%= link_to 'Sections',   sections_path,
+                  class: 'dropdown-item' %>
             <div class="dropdown-divider"></div>
             <%= link_to 'Academic Years',   academic_years_path,
                   class: 'dropdown-item' %>
