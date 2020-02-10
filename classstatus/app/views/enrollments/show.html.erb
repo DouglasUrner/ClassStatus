@@ -1,0 +1,27 @@
+<p>
+  <strong>Student:</strong>
+  <%= @enrollment.student_id %>
+</p>
+
+<p>
+  <strong>Section:</strong>
+  <%= @enrollment.section_id %>
+</p>
+
+<p>
+  <strong>Joined course:</strong>
+  <%= @enrollment.joined_course %>
+</p>
+
+<p>
+  <strong>Joined section:</strong>
+  <%= @enrollment.joined_section %>
+</p>
+
+<p>
+  <strong>Dropped course:</strong>
+  <%= @enrollment.dropped_course %>
+</p>
+
+<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<%= link_to 'Back', enrollments_path %>
