@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: A1
   sort_order: 1
 
-two:
-  name: MyString
+five:
+  name: B5
   sort_order: 1
