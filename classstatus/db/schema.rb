@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_025749) do
+ActiveRecord::Schema.define(version: 2020_02_10_033827) do
 
   create_table "academic_years", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,19 @@ ActiveRecord::Schema.define(version: 2020_02_10_025749) do
     t.string "short_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "academic_year_id", null: false
+    t.integer "term_id", null: false
+    t.integer "block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["academic_year_id"], name: "index_sections_on_academic_year_id"
+    t.index ["block_id"], name: "index_sections_on_block_id"
+    t.index ["course_id"], name: "index_sections_on_course_id"
+    t.index ["term_id"], name: "index_sections_on_term_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -73,6 +86,10 @@ ActiveRecord::Schema.define(version: 2020_02_10_025749) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "sections", "academic_years"
+  add_foreign_key "sections", "blocks"
+  add_foreign_key "sections", "courses"
+  add_foreign_key "sections", "terms"
   add_foreign_key "terms", "academic_years"
   add_foreign_key "terms", "term_names"
 end

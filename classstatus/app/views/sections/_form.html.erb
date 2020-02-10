@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@section) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class='form-inputs'>
+    <%= f.association :course %>
+    <%= f.association :academic_year %>
+    <%= f.association :term %>
+    <%= f.association :block %>
+  </div>
+
+  <div class='form-actions'>
+    <%= f.button :submit, class: 'btn-primary' %>
+  </div>
+<% end %>

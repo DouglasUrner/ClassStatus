@@ -1,0 +1,29 @@
+<h1><span>Sections</span>
+  <span><%= link_to '+', new_section_path %></span></h1>
+
+<table class='table table-sm table-striped'>
+  <thead class='thead-dark'>
+    <tr>
+      <th scope='row'>Course</th>
+      <th scope='row'>Academic year</th>
+      <th scope='row'>Term</th>
+      <th scope='row'>Block</th>
+      <th scope='row' colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td><%= section.course_name %></td>
+        <td><%= section.year_name %></td>
+        <td><%= section.term_name %></td>
+        <td><%= section.block_name %></td>
+        <td><%= link_to 'Show', section %></td>
+        <td><%= link_to 'Edit', edit_section_path(section) %></td>
+        <td><%= link_to 'Destroy', section,
+          method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
