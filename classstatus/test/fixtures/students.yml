@@ -1,25 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  guid: MyString
-  preferred_name: MyString
-  given_name: MyString
-  family_name: MyString
-  pronouns: MyString
-  gender: MyString
+  guid: 0001
+  preferred_name:
+  given_name: Given1
+  family_name: Family1
+  pronouns:
+  gender: X
   dob: 2020-02-09
   cohort: 1
   gpa: 1.5
   gpa_updated: 2020-02-09 21:45:20
 
 two:
-  guid: MyString
-  preferred_name: MyString
-  given_name: MyString
-  family_name: MyString
-  pronouns: MyString
-  gender: MyString
+  guid: 0002
+  preferred_name: Preferred2
+  given_name: Given2
+  family_name: Family2
+  pronouns: she/her
+  gender: F
   dob: 2020-02-09
   cohort: 1
-  gpa: 1.5
+  gpa: 3.5
   gpa_updated: 2020-02-09 21:45:20
