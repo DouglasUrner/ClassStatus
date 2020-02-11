@@ -4,6 +4,18 @@ class Section < ApplicationRecord
   belongs_to :term
   belongs_to :block
 
+  def name
+    self.short_name
+  end
+
+  def long_name
+    "#{self.course_name}"
+  end
+
+  def short_name
+    "#{self.course_name} (#{self.block_name})"
+  end
+
   def block_name
     self.block.name
   end

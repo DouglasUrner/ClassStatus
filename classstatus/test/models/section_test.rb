@@ -24,4 +24,16 @@ class SectionTest < ActiveSupport::TestCase
     term_name = @section.term_name
     assert_equal 'Term 1', term_name
   end
+
+  test 'name should be the short name of the section' do
+    assert_equal @section.short_name, @section.name
+  end
+
+  test 'should get long name for section' do
+    assert_equal 'Course One ()', @section.long_name
+  end
+
+  test 'should get the short name for the section' do
+    assert_equal 'Course One (A1)', @section.short_name
+  end
 end
