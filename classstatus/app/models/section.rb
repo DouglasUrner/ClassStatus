@@ -4,6 +4,9 @@ class Section < ApplicationRecord
   belongs_to :term
   belongs_to :block
 
+  has_many :enrollments
+  has_many :students, through: :enrollments
+
   def name
     self.short_name
   end
