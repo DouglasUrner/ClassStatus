@@ -5,4 +5,8 @@ class Term < ApplicationRecord
   def name
     self.term_name.name
   end
+
+  def short_name
+    self.term_name.short_name
+  end
 end
