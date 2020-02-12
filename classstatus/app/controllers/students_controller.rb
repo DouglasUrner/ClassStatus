@@ -68,6 +68,8 @@ class StudentsController < ApplicationController
 
         s.save
       end
+      redirect_to students_path,
+        notice: "Imported students."
     end
   end
 
