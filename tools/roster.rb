@@ -27,7 +27,7 @@ def kv_pair(k, v, comma)
 end
 
 def clean_name(n)
-  # 0: preficx
+  # 0: prefix
   # 1: given name
   # 2: middle name
   # 3: family name

@@ -33,6 +33,44 @@ class StudentsController < ApplicationController
     end
   end
 
+  # POST /students/import
+  def import
+    file = params[:file]
+
+    roster =
+    case File.extname(file)
+    when '.xml'  then Roo::Spreadsheet.open(file.path)
+    else nil
+    end
+
+    if (roster == nil)
+      redirect_to students_path,
+        alert: "Unable to import #{file.original_filename}: unsupported file type \'#{File.extname(file)}\'"
+    else
+      export_date = roster.row(1)[6].sub('Date: ', '')
+      export_time = roster.row(2)[6].sub('Time: ', '')
+
+      8.upto(roster.last_row) do |i|
+        row = roster.row(i)
+        s = Student.new()
+
+        s.guid = row[1]
+
+        name_array = row[0].strip.split(/,\s*/)
+        s.family_name = name_array[0]
+        s.given_name = name_array[1].sub(/\s\w\.$/, '')
+
+        s.dob = row[2]
+        s.gender = row[4] == 'Male' ? 'M' : 'F'
+        s.cohort = row[5]
+        s.gpa = row[3]
+        s.gpa_updated = export_date
+
+        s.save
+      end
+    end
+  end
+
   # PATCH/PUT /students/1
   def update
     if @student.update(student_params)

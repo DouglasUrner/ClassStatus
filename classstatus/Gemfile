@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 ####
-# Local changes below
+# Foundation
 
 # Simple Form - Bootstrap support is pulled in during installation
 # rails generate simple_form:install --bootstrap
@@ -41,7 +41,15 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 # Ledermann rails-settings: configuration
 gem 'ledermann-rails-settings', '~> 2.5'
 
-# End of local changes
+# End of Foundation
+####
+# Local additions
+
+# Roo - import spreadsheet files (rosters)
+gem 'roo', '~> 2.8.0'
+gem 'roo-xls'
+
+# End of local additions
 ####
 
 group :development, :test do

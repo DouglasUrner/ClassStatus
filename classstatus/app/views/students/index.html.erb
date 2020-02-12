@@ -1,6 +1,17 @@
 <h1><span>Students</span>
   <span><%= link_to '+', new_student_path %></span></h1>
 
+<h3>Import Students</h3>
+<%= form_tag import_students_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= select_tag :section,
+        options_from_collection_for_select(Section.order(:block_id), "id", "name"),
+        include_blank: "Select Section" %>
+  <%= submit_tag 'Import', class: 'btn btn-primary' %>
+<% end %>
+
+<br>
+
 <table class='table table-sm table-striped'>
   <thead class='thead-dark'>
     <tr>
