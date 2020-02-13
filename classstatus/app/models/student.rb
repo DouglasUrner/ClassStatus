@@ -1,4 +1,6 @@
 class Student < ApplicationRecord
+  has_many :enrollments, dependent: :destroy
+  
   def name
     self.full_name
   end
