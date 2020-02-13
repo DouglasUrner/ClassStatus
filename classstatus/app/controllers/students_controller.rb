@@ -37,40 +37,64 @@ class StudentsController < ApplicationController
   def import
     file = params[:file]
 
-    roster =
+    @roster =
     case File.extname(file)
     when '.xml'  then Roo::Spreadsheet.open(file.path)
     else nil
     end
 
-    if (roster == nil)
+    if (@roster == nil)
       redirect_to students_path,
         alert: "Unable to import #{file.original_filename}: unsupported file type \'#{File.extname(file)}\'"
     else
-      export_date = roster.row(1)[6].sub('Date: ', '')
-      export_time = roster.row(2)[6].sub('Time: ', '')
+      skyward_import
 
-      8.upto(roster.last_row) do |i|
-        row = roster.row(i)
-        s = Student.new()
-
-        s.guid = row[1]
-
-        name_array = row[0].strip.split(/,\s*/)
-        s.family_name = name_array[0]
-        s.given_name = name_array[1].sub(/\s\w\.$/, '')
-
-        s.dob = row[2]
-        s.gender = row[4] == 'Male' ? 'M' : 'F'
-        s.cohort = row[5]
-        s.gpa = row[3]
-        s.gpa_updated = export_date
-
-        s.save
-      end
       redirect_to students_path,
         notice: "Imported students."
     end
+  end
+
+  def skyward_import
+    export_date = @roster.row(1)[6].sub('Date: ', '')
+    export_time = @roster.row(2)[6].sub('Time: ', '')
+    timestamp = mmddyyyy_to_iso(export_date, export_time)
+
+    8.upto(@roster.last_row) do |i|
+      skyward_import_row(@roster.row(i), timestamp)
+    end
+  end
+
+  def skyward_import_row(row, timestamp)
+    s = Student.new()
+
+    s.guid = row[1]
+
+    name_array = row[0].strip.split(/,\s*/)
+    s.family_name = name_array[0]
+    s.given_name = name_array[1].sub(/\s\w\.$/, '')
+
+    s.dob = mmddyyyy_to_iso(row[2])
+    s.gender = row[4] == 'Male' ? 'M' : 'F'
+    s.cohort = row[5]
+    s.gpa = row[3]
+    s.gpa_updated = timestamp
+
+    s.save
+  end
+
+  def mmddyyyy_to_iso(date, time = nil)
+    # Skward exports dates as MM/DD/YYYY and MM/DD/YY
+    tmp = date.split('/')
+    tmp[2] = (tmp[2].to_i + 2000).to_s if tmp[2].length == 2
+    date = "#{tmp[2]}-#{tmp[0]}-#{tmp[1]}"
+    if (time == nil)
+      date
+    else
+      "#{date}T#{time}#{Time.now.getlocal.formatted_offset}"
+    end
+  end
+
+  def enroll_student(student, section, date = Date.today)
   end
 
   # PATCH/PUT /students/1
