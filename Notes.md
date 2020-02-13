@@ -1,3 +1,7 @@
+## Gems
+* Cocoon - simple form features
+* Roo - spreadsheet import
+
 ## Annotations
   - Off task behaviors:
     - On cell phone
@@ -16,7 +20,7 @@
   - [f/graphql.js](https://github.com/f/graphql.js) - JavaScript client.
   - [Canvas GraphQL docs](https://canvas.instructure.com/doc/api/file.graphql.html) - There is a Graph*i*QL endpoint at https://canvas.instructure.com/graphiql. The endpoint seems to work, at least for queries, after logging in without credentials. Credentials may be generated on the settings page of the course.
   - [GitHub GraphQL docs](https://developer.github.com/v4/) - There is a Graph*i*QL endpoint.
-  
+
 ### Tutorials
 * [GraphQL on Rails](https://evilmartians.com/chronicles/graphql-on-rails-1-from-zero-to-the-first-query)
 * [Interacting with Github GraphQL API in Ruby](https://medium.com/devnetwork/interacting-with-github-graphql-api-in-ruby-6a09249dd44f)
