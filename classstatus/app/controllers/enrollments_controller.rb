@@ -58,7 +58,10 @@ class EnrollmentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def enrollment_params
-      params.require(:enrollment).permit(:student_id, :section_id, :joined_course, :joined_section, :dropped_course)
+      params.require(:enrollment).permit(
+        :student_id, :section_id,
+        :joined_course, :joined_section, :dropped_course
+      )
     end
 
     # Helpers for sortable table columns.
