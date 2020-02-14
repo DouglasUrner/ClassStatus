@@ -6,9 +6,9 @@
     <tr>
       <th scope='row'>Student</th>
       <th scope='row'>Section</th>
-      <th scope='row'>Joined course</th>
-      <th scope='row'>Joined section</th>
-      <th scope='row'>Dropped course</th>
+      <th scope='row'>Joined Course</th>
+      <th scope='row'>Joined Section</th>
+      <th scope='row'>Dropped Course</th>
       <th scope='row' colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +16,8 @@
   <tbody>
     <% @enrollments.each do |enrollment| %>
       <tr>
-        <td><%= enrollment.student_id %></td>
-        <td><%= enrollment.section_id %></td>
+        <td><%= enrollment.student.name %></td>
+        <td><%= enrollment.short_name %></td>
         <td><%= enrollment.joined_course %></td>
         <td><%= enrollment.joined_section %></td>
         <td><%= enrollment.dropped_course %></td>
