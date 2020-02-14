@@ -1,6 +1,6 @@
 class Student < ApplicationRecord
   has_many :enrollments, dependent: :destroy
-  
+
   def name
     self.full_name
   end
@@ -23,5 +23,26 @@ class Student < ApplicationRecord
 
   def preferred_or_given_name
     self.preferred_name ? self.preferred_name : self.given_name
+  end
+
+  # Take the attributes in new and merge (update) them into old. Don't change
+  # the values of guid and id (id should be unset and a guid mismatch would be
+  # a fatal error. Return a copy of old with updates from new.
+  #
+  # TODO: figure out how to avoid updating the student record if nothing has
+  # changed - maybe have a compare routine and make the update conditional.
+  def merge_attributes(new)
+    merge = Student.new(attributes).attributes
+    new.attributes.each do |key, value|
+      case key
+      when 'guid'       ; puts 'guid: skipped'
+      when 'id'         ; puts 'id: skipped'
+      when 'created_at' ;
+      when 'updated_at' ;
+      else
+        merge[key] = value if merge.key?(key)
+      end
+    end
+    merge
   end
 end

@@ -35,6 +35,8 @@ class StudentsController < ApplicationController
 
   # POST /students/import
   def import
+    count = 0; enrolled = 0; dupes = 0; msg = ""
+
     file = params[:file]
 
     @roster =
@@ -47,39 +49,71 @@ class StudentsController < ApplicationController
       redirect_to students_path,
         alert: "Unable to import #{file.original_filename}: unsupported file type \'#{File.extname(file)}\'"
     else
-      skyward_import
+      students = skyward_parse
+
+      students.each do |s|
+        if (Student.exists?(guid: s['guid']))
+          @student = Student.find_by(guid: s['guid'])
+          # TODO: some of the student information may have changed - especially
+          #       their GPA - so we need to do something about checking and
+          #       updating the record.
+          updated_attributes = @student.merge_attributes(s)
+          @student.update(updated_attributes)
+          dupes += 1
+        else
+          @student = Student.new(s)
+          if (@student.gpa == nil)
+            @student.gpa_updated = nil
+          end
+          @student.save
+          count += 1
+        end
+
+        if (params[:section] != '')
+          enroll_student(@student, params[:section], Date.iso8601('2020-01-31'))
+          enrolled += 1
+        end
+      end
+
+      msg += "Imported #{count} students from #{params[:file].original_filename}. "
+      if (params[:section] != '')
+        msg += "Enrolled #{enrolled} students in #{Section.find(params[:section]).name}. "
+      end
+      msg += "Skipped #{dupes} students who were already in the database."
 
       redirect_to students_path,
-        notice: "Imported students."
+        notice: msg
     end
   end
 
-  def skyward_import
+  def skyward_parse
     export_date = @roster.row(1)[6].sub('Date: ', '')
     export_time = @roster.row(2)[6].sub('Time: ', '')
     timestamp = mmddyyyy_to_iso(export_date, export_time)
 
+    students = []
     8.upto(@roster.last_row) do |i|
-      skyward_import_row(@roster.row(i), timestamp)
+      students.push(skyward_process_row(@roster.row(i), timestamp))
     end
+    students
   end
 
-  def skyward_import_row(row, timestamp)
-    s = Student.new()
+  def skyward_process_row(row, timestamp)
+    student = Student.new()
 
-    s.guid = row[1]
+    student.guid = row[1]
 
     name_array = row[0].strip.split(/,\s*/)
-    s.family_name = name_array[0]
-    s.given_name = name_array[1].sub(/\s\w\.$/, '')
+    student.family_name = name_array[0]
+    student.given_name = name_array[1].sub(/\s\w\.$/, '')
 
-    s.dob = mmddyyyy_to_iso(row[2])
-    s.gender = row[4] == 'Male' ? 'M' : 'F'
-    s.cohort = row[5]
-    s.gpa = row[3]
-    s.gpa_updated = timestamp
+    student.dob = mmddyyyy_to_iso(row[2])
+    student.gender = row[4] == 'Male' ? 'M' : 'F'
+    student.cohort = row[5]
+    student.gpa = row[3]
+    student.gpa_updated = timestamp
 
-    s.save
+    student
   end
 
   def mmddyyyy_to_iso(date, time = nil)
@@ -95,6 +129,13 @@ class StudentsController < ApplicationController
   end
 
   def enroll_student(student, section, date = Date.today)
+    if (!Enrollment.exists?(student_id: student, section_id: section))
+      @enrollment = Enrollment.new()
+      @enrollment.student_id = student.id
+      @enrollment.section_id = section
+      @enrollment.joined_course = date
+      @enrollment.save
+    end
   end
 
   # PATCH/PUT /students/1
@@ -122,7 +163,10 @@ class StudentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def student_params
-      params.require(:student).permit(:guid, :preferred_name, :given_name, :family_name, :pronouns, :gender, :dob, :cohort, :gpa, :gpa_updated)
+      params.require(:student).permit(
+        :guid, :preferred_name, :given_name, :family_name, :pronouns,
+        :gender, :dob, :cohort, :gpa, :gpa_updated
+      )
     end
 
     # Helpers for sortable table columns.
