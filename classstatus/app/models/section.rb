@@ -20,12 +20,20 @@ class Section < ApplicationRecord
     "#{self.block_name}: #{self.course_name}"
   end
 
+  def abbreviated_name
+    "#{self.block_name}: #{self.course_short_name}"
+  end
+
   def block_name
     self.block.name
   end
 
   def course_name
     self.course.name
+  end
+
+  def course_short_name
+    self.course.short_name
   end
 
   def term_name
