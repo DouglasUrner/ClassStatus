@@ -1,0 +1,22 @@
+<p>
+  <strong>Section:</strong>
+  <%= @attendance_record.section_id %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @attendance_record.student_id %>
+</p>
+
+<p>
+  <strong>Attendance date:</strong>
+  <%= @attendance_record.attendance_date %>
+</p>
+
+<p>
+  <strong>Marks:</strong>
+  <%= @attendance_record.marks %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_record_path(@attendance_record) %> |
+<%= link_to 'Back', attendance_records_path %>

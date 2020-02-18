@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_054520) do
+ActiveRecord::Schema.define(version: 2020_02_15_012407) do
 
   create_table "academic_years", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "attendance_records", force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "student_id", null: false
+    t.date "attendance_date"
+    t.text "marks"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_attendance_records_on_section_id"
+    t.index ["student_id"], name: "index_attendance_records_on_student_id"
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -114,6 +125,8 @@ ActiveRecord::Schema.define(version: 2020_02_10_054520) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendance_records", "sections"
+  add_foreign_key "attendance_records", "students"
   add_foreign_key "enrollments", "sections"
   add_foreign_key "enrollments", "students"
   add_foreign_key "sections", "academic_years"

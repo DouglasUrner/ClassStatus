@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  section: one
+  student: one
+  attendance_date: 2020-02-14
+  marks: MyText
+
+two:
+  section: two
+  student: two
+  attendance_date: 2020-02-14
+  marks: MyText
