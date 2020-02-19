@@ -58,12 +58,12 @@ class AttendanceRecordsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def attendance_record_params
-      params.require(:attendance_record).permit(:section_id, :student_id, :attendance_date, :marks)
+      params.require(:attendance_record).permit(:section_id, :student_id, :attendance_date, :primary, :secondary, :annotation)
     end
 
     # Helpers for sortable table columns.
     def sort_column
-      AttendanceRecord.column_names.include?(params[:sort]) ? params[:sort] : 'section_id'
+      AttendanceRecord.column_names.include?(params[:sort]) ? params[:sort] : 'name'
     end
 
     def sort_direction

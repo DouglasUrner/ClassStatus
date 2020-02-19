@@ -17,7 +17,7 @@ class AttendanceRecordsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create attendance_record" do
     assert_difference('AttendanceRecord.count') do
-      post attendance_records_url, params: { attendance_record: { attendance_date: @attendance_record.attendance_date, marks: @attendance_record.marks, section_id: @attendance_record.section_id, student_id: @attendance_record.student_id } }
+      post attendance_records_url, params: { attendance_record: { annotation: @attendance_record.annotation, attendance_date: @attendance_record.attendance_date, primary: @attendance_record.primary, secondary: @attendance_record.secondary, section_id: @attendance_record.section_id, student_id: @attendance_record.student_id } }
     end
 
     assert_redirected_to attendance_record_url(AttendanceRecord.last)
@@ -34,7 +34,7 @@ class AttendanceRecordsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update attendance_record" do
-    patch attendance_record_url(@attendance_record), params: { attendance_record: { attendance_date: @attendance_record.attendance_date, marks: @attendance_record.marks, section_id: @attendance_record.section_id, student_id: @attendance_record.student_id } }
+    patch attendance_record_url(@attendance_record), params: { attendance_record: { annotation: @attendance_record.annotation, attendance_date: @attendance_record.attendance_date, primary: @attendance_record.primary, secondary: @attendance_record.secondary, section_id: @attendance_record.section_id, student_id: @attendance_record.student_id } }
     assert_redirected_to attendance_record_url(@attendance_record)
   end
 

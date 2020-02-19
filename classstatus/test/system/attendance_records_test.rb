@@ -14,8 +14,10 @@ class AttendanceRecordsTest < ApplicationSystemTestCase
     visit attendance_records_url
     click_on "New Attendance Record"
 
+    fill_in "Annotation", with: @attendance_record.annotation
     fill_in "Attendance date", with: @attendance_record.attendance_date
-    fill_in "Marks", with: @attendance_record.marks
+    fill_in "Primary", with: @attendance_record.primary
+    fill_in "Secondary", with: @attendance_record.secondary
     fill_in "Section", with: @attendance_record.section_id
     fill_in "Student", with: @attendance_record.student_id
     click_on "Create Attendance record"
@@ -28,8 +30,10 @@ class AttendanceRecordsTest < ApplicationSystemTestCase
     visit attendance_records_url
     click_on "Edit", match: :first
 
+    fill_in "Annotation", with: @attendance_record.annotation
     fill_in "Attendance date", with: @attendance_record.attendance_date
-    fill_in "Marks", with: @attendance_record.marks
+    fill_in "Primary", with: @attendance_record.primary
+    fill_in "Secondary", with: @attendance_record.secondary
     fill_in "Section", with: @attendance_record.section_id
     fill_in "Student", with: @attendance_record.student_id
     click_on "Update Attendance record"

@@ -4,7 +4,9 @@ class CreateAttendanceRecords < ActiveRecord::Migration[6.0]
       t.references :section, null: false, foreign_key: true
       t.references :student, null: false, foreign_key: true
       t.date :attendance_date
-      t.text :marks
+      t.string :primary
+      t.string :secondary
+      t.string :annotation
 
       t.timestamps
     end

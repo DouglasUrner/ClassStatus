@@ -14,8 +14,18 @@
 </p>
 
 <p>
-  <strong>Marks:</strong>
-  <%= @attendance_record.marks %>
+  <strong>Primary:</strong>
+  <%= @attendance_record.primary %>
+</p>
+
+<p>
+  <strong>Secondary:</strong>
+  <%= @attendance_record.secondary %>
+</p>
+
+<p>
+  <strong>Annotation:</strong>
+  <%= @attendance_record.annotation %>
 </p>
 
 <%= link_to 'Edit', edit_attendance_record_path(@attendance_record) %> |

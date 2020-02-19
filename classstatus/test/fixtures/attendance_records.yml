@@ -3,11 +3,15 @@
 one:
   section: one
   student: one
-  attendance_date: 2020-02-14
-  marks: MyText
+  attendance_date: 2020-02-18
+  primary: MyString
+  secondary: MyString
+  annotation: MyString
 
 two:
   section: two
   student: two
-  attendance_date: 2020-02-14
-  marks: MyText
+  attendance_date: 2020-02-18
+  primary: MyString
+  secondary: MyString
+  annotation: MyString

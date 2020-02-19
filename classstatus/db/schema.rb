@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_15_012407) do
+ActiveRecord::Schema.define(version: 2020_02_19_023835) do
 
   create_table "academic_years", force: :cascade do |t|
     t.string "name"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2020_02_15_012407) do
     t.integer "section_id", null: false
     t.integer "student_id", null: false
     t.date "attendance_date"
-    t.text "marks"
+    t.string "primary"
+    t.string "secondary"
+    t.string "annotation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_attendance_records_on_section_id"
