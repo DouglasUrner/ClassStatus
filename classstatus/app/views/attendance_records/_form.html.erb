@@ -1,15 +1,19 @@
 
 <%= simple_form_for(@attendance_record) do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.error_notification message:
+    f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class='form-inputs'>
     <%= f.association :section %>
     <%= f.association :student %>
     <%= f.input :attendance_date %>
-    <%= f.input :primary %>
-    <%= f.input :secondary %>
-    <%= f.input :annotation %>
+    <%= f.collection_radio_buttons :primary,
+      AttendanceRecord.primaries, :second, :first   %>
+    <%= f.collection_radio_buttons :secondary,
+      AttendanceRecord.secondaries, :second, :first %>
+    <%= f.collection_radio_buttons :annotation,
+      AttendanceRecord.annotations, :second, :first %>
   </div>
 
   <div class='form-actions'>
