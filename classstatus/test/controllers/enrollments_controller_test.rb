@@ -17,7 +17,7 @@ class EnrollmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create enrollment" do
     assert_difference('Enrollment.count') do
-      post enrollments_url, params: { enrollment: { section: @enrollment.section, status: @enrollment.status, student: @enrollment.student } }
+      post enrollments_url, params: { enrollment: { section: @enrollment.section, joined_course: @enrollment.joined_course, student: @enrollment.student } }
     end
 
     assert_redirected_to enrollment_url(Enrollment.last)

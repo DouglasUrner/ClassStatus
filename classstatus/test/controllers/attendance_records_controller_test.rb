@@ -15,7 +15,16 @@ class AttendanceRecordsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not create attendance_record" do
+    assert_difference('AttendanceRecord.count', 0) do
+      post attendance_records_url, params: { attendance_record: { attendance_date: @attendance_record.attendance_date, attendance_entered: @attendance_record.attendance_entered, section_id: @attendance_record.section_id, state: @attendance_record.state, student_id: @attendance_record.student_id } }
+    end
+
+    assert_redirected_to attendance_record_url(AttendanceRecord.last)
+  end
+
   test "should create attendance_record" do
+    @attendance_record = attendance_records(:three)
     assert_difference('AttendanceRecord.count') do
       post attendance_records_url, params: { attendance_record: { attendance_date: @attendance_record.attendance_date, attendance_entered: @attendance_record.attendance_entered, section_id: @attendance_record.section_id, state: @attendance_record.state, student_id: @attendance_record.student_id } }
     end

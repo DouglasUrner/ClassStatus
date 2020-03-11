@@ -1,21 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  guid: MyString
-  preferred_name: MyString
-  given_name: MyString
-  family_name: MyString
+  guid: 42
+  preferred_name: Penzey
+  given_name: Penny
+  family_name: Steele
   dob: 2020-01-26
-  cohort: 
+  cohort: 2020
   gpa: 1.5
   gpa_updated: 2020-01-26 18:09:46
 
 two:
-  guid: MyString
-  preferred_name: MyString
-  given_name: MyString
-  family_name: MyString
+  guid: 24
+  preferred_name:
+  given_name: Jasper
+  family_name: Steele
   dob: 2020-01-26
-  cohort: 
+  cohort: 2022
   gpa: 1.5
   gpa_updated: 2020-01-26 18:09:46
